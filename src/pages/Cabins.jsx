@@ -8,7 +8,7 @@ function Cabins() {
 
   return (
     <div>
-      text
+
     </div>
   )
 }
