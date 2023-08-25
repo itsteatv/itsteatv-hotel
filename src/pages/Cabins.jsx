@@ -1,14 +1,10 @@
-import { useEffect } from "react"
-import { getCabins } from "../services/apiCabins"
+import Table from "../ui/Table"
 
 function Cabins() {
-  useEffect(() => {
-    getCabins().then((data) => console.log(data))
-  }, [])
 
   return (
     <div>
-
+      <Table />
     </div>
   )
 }
