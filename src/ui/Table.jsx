@@ -52,7 +52,7 @@ function Table() {
                                 </td>
                                 <td className="px-6 py-4">
                                     <div className="flex items-center space-x-3">
-                                        <p className="font-semibold text-gray-900 dark:text-white">Fits up to {cabin.max} guests</p>
+                                        <p className="font-semibold text-gray-900 dark:text-white">Fits up to {cabin.maxCapacity} guests</p>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
