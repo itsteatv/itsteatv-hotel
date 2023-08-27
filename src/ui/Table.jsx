@@ -1,5 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCabins, deleteCabin } from "../services/apiCabins";
+import { toast } from "react-hot-toast";
+import { MdDeleteForever } from "react-icons/md";
+import { GiChoppedSkull } from "react-icons/gi";
 import Spinner from "../ui/Spinner";
 
 function Table() {
@@ -9,14 +12,18 @@ function Table() {
         mutationFn: deleteCabin,
 
         onSuccess: () => {
-            alert("Cabin has been deleted")
+            toast.success("Cabin has been deleted successfully", {
+                icon: <MdDeleteForever />,
+            })
             queryClient.invalidateQueries({
                 queryKey: ["cabin"]
             })
         },
 
         onError: (error) => {
-            alert(error.message);
+            toast.error("Cabin Could not be deleted", {
+                icon: <GiChoppedSkull />,
+            })
         }
     })
 
