@@ -1,9 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
-import { getCabins } from "../services/apiCabins";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCabins, deleteCabin } from "../services/apiCabins";
 import Spinner from "../ui/Spinner";
-import "flowbite";
 
 function Table() {
+    const queryClient = useQueryClient();
+
+    const { isLoading: isDeleting, isError, mutate } = useMutation({
+        mutationFn: deleteCabin,
+
+        onSuccess: () => {
+            alert("Cabin has been deleted")
+            queryClient.invalidateQueries({
+                queryKey: ["cabin"]
+            })
+        },
+
+        onError: (error) => {
+            alert(error.message);
+        }
+    })
+
     const { isLoading, data: cabins, error } = useQuery({
         queryKey: ["cabin"],
         queryFn: getCabins
@@ -84,17 +100,21 @@ function Table() {
                                             aria-labelledby="hs-dropdown-custom-icon-trigger"
                                         >
                                             <button
+                                                type="button"
                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                             >
                                                 Duplicate
                                             </button>
                                             <button
+                                                type="button"
                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                             >
                                                 Edit
                                             </button>
                                             <button
-                                                className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                                type="button"
+                                                disabled={isDeleting}
+                                                onClick={() => mutate(cabin.id)} className="disabled:cursor-not-allowed flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                             >
                                                 Delete
                                             </button>
