@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form"
+import('preline')
 
 function CreateCabinForm() {
     const { register, handleSubmit } = useForm()
