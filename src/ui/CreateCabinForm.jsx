@@ -1,5 +1,12 @@
+import { useForm } from "react-hook-form"
 
 function CreateCabinForm() {
+    const { register, handleSubmit } = useForm()
+
+    const onSubmitHandler = function (data) {
+        console.log(data);
+    }
+
     return (
         <>
             <div
@@ -11,7 +18,7 @@ function CreateCabinForm() {
                         <div className="p-4 sm:p-7">
                             <div className="mt-5">
                                 {/* Form */}
-                                <form>
+                                <form onSubmit={handleSubmit(onSubmitHandler)}>
                                     <div className="grid gap-y-4">
                                         {/* Form Group */}
                                         <div>
@@ -26,6 +33,7 @@ function CreateCabinForm() {
                                                     type="text"
                                                     id="name"
                                                     name="name"
+                                                    {...register("name")}
                                                     className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
@@ -56,6 +64,7 @@ function CreateCabinForm() {
                                                     type="number"
                                                     id="maxCapacity"
                                                     name="maxCapacity"
+                                                    {...register("maxCapacity")}
                                                     className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
@@ -86,6 +95,7 @@ function CreateCabinForm() {
                                                     type="number"
                                                     id="regularPrice"
                                                     name="regularPrice"
+                                                    {...register("regularPrice")}
                                                     className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                     required=""
                                                 />
@@ -118,6 +128,7 @@ function CreateCabinForm() {
                                                     id="discount"
                                                     name="discount"
                                                     defaultValue={0}
+                                                    {...register("discount")}
                                                     className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
@@ -149,6 +160,7 @@ function CreateCabinForm() {
                                                     id="description"
                                                     name="description"
                                                     defaultValue=""
+                                                    {...register("description")}
                                                     className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
@@ -200,6 +212,12 @@ function CreateCabinForm() {
                                             className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                                         >
                                             Create new cabin
+                                        </button>
+                                        <button
+                                            type="reset"
+                                            className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                                        >
+                                            Cancel
                                         </button>
                                     </div>
                                 </form>
