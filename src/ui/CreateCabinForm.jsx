@@ -1,11 +1,38 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
+import { createCabin } from "../services/apiCabins"
+import { toast } from "react-hot-toast"
+import { MdOutlineAddTask } from "react-icons/md"
+import { GiChoppedSkull } from "react-icons/gi"
 import('preline')
 
 function CreateCabinForm() {
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, reset } = useForm();
+
+    const queryClient = useQueryClient();
+
+    const { isLoading: isAdding, mutate } = useMutation({
+        mutationFn: createCabin,
+
+        onSuccess: () => {
+            toast.success("New cabin successfully created", {
+                icon: <MdOutlineAddTask />,
+            }),
+                queryClient.invalidateQueries({
+                    queryKey: ["cabin"]
+                }),
+                reset();
+        },
+
+        onError: () => {
+            toast.error("Cabin Could not be added", {
+                icon: <GiChoppedSkull />,
+            })
+        }
+    })
 
     const onSubmitHandler = function (data) {
-        console.log(data);
+        mutate(data);
     }
 
     return (
@@ -209,8 +236,9 @@ function CreateCabinForm() {
                                             </div>
                                         </div>
                                         <button
+                                            disabled={isAdding}
                                             type="submit"
-                                            className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                                            className="disabled:cursor-not-allowed py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                                         >
                                             Create new cabin
                                         </button>
