@@ -7,7 +7,9 @@ import { GiChoppedSkull } from "react-icons/gi"
 import('preline')
 
 function CreateCabinForm() {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, getValues, formState } = useForm();
+    const { errors, isDirty, isValid } = formState;
+    console.log(errors);
 
     const queryClient = useQueryClient();
 
@@ -35,6 +37,8 @@ function CreateCabinForm() {
         mutate(data);
     }
 
+    const onErrorHandler = function (error) { }
+
     return (
         <>
             <div
@@ -46,7 +50,7 @@ function CreateCabinForm() {
                         <div className="p-4 sm:p-7">
                             <div className="mt-5">
                                 {/* Form */}
-                                <form onSubmit={handleSubmit(onSubmitHandler)}>
+                                <form onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}>
                                     <div className="grid gap-y-4">
                                         {/* Form Group */}
                                         <div>
@@ -58,11 +62,14 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
+                                                    disabled={isAdding}
                                                     type="text"
                                                     id="name"
                                                     name="name"
-                                                    {...register("name")}
-                                                    className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                                                    {...register("name", {
+                                                        required: "This field is required"
+                                                    })}
+                                                    className="disabled:cursor-not-allowed py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
                                                     <svg
@@ -76,6 +83,7 @@ function CreateCabinForm() {
                                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                                                     </svg>
                                                 </div>
+                                                {errors?.name?.message && <p className="text-red-600 mt-3">{errors.name.message}</p>}
                                             </div>
                                         </div>
                                         {/* End Form Group */}
@@ -89,11 +97,18 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
+                                                    disabled={isAdding}
                                                     type="number"
                                                     id="maxCapacity"
                                                     name="maxCapacity"
-                                                    {...register("maxCapacity")}
-                                                    className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                                                    {...register("maxCapacity", {
+                                                        required: "This field is required",
+                                                        min: {
+                                                            value: 1,
+                                                            message: "Capacity at least should be 1"
+                                                        }
+                                                    })}
+                                                    className="disabled:cursor-not-allowed py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
                                                     <svg
@@ -107,6 +122,7 @@ function CreateCabinForm() {
                                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                                                     </svg>
                                                 </div>
+                                                {errors?.maxCapacity?.message && <p className="text-red-600 mt-3">{errors.maxCapacity.message}</p>}
                                             </div>
                                         </div>
                                         {/* End Form Group */}
@@ -120,11 +136,14 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
+                                                    disabled={isAdding}
                                                     type="number"
                                                     id="regularPrice"
                                                     name="regularPrice"
-                                                    {...register("regularPrice")}
-                                                    className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                                                    {...register("regularPrice", {
+                                                        required: "This field is required"
+                                                    })}
+                                                    className="disabled:cursor-not-allowed py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                     required=""
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
@@ -139,6 +158,7 @@ function CreateCabinForm() {
                                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                                                     </svg>
                                                 </div>
+                                                {errors?.regularPrice?.message && <p className="text-red-600 mt-3">{errors.regularPrice.message}</p>}
                                             </div>
                                         </div>
                                         {/* End Form Group */}
@@ -152,12 +172,17 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
+                                                    disabled={isAdding}
                                                     type="number"
                                                     id="discount"
                                                     name="discount"
                                                     defaultValue={0}
-                                                    {...register("discount")}
-                                                    className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                                                    {...register("discount", {
+                                                        required: "This field is required",
+                                                        validate: (value, values) =>
+                                                            value <= values.regularPrice || "Discount should be less than regular price"
+                                                    })}
+                                                    className="disabled:cursor-not-allowed py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
                                                     <svg
@@ -171,6 +196,7 @@ function CreateCabinForm() {
                                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                                                     </svg>
                                                 </div>
+                                                {errors?.discount?.message && <p className="text-red-600 mt-3">{errors.discount.message}</p>}
                                             </div>
                                         </div>
                                         {/* End Form Group */}
@@ -188,8 +214,10 @@ function CreateCabinForm() {
                                                     id="description"
                                                     name="description"
                                                     defaultValue=""
-                                                    {...register("description")}
-                                                    className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                                                    {...register("description", {
+                                                        required: "This field is required"
+                                                    })}
+                                                    className="disabled:cursor-not-allowed py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
                                                     <svg
@@ -236,9 +264,10 @@ function CreateCabinForm() {
                                             </div>
                                         </div>
                                         <button
+                                            // disabled={isAdding || !isValid || !isDirty}
                                             disabled={isAdding}
                                             type="submit"
-                                            className="disabled:cursor-not-allowed py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                                            className="disabled:cursor-not-allowed disabled:bg-gray-300 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                                         >
                                             Create new cabin
                                         </button>
