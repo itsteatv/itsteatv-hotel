@@ -179,8 +179,8 @@ function CreateCabinForm() {
                                                     defaultValue={0}
                                                     {...register("discount", {
                                                         required: "This field is required",
-                                                        validate: (value, values) =>
-                                                            value <= values.regularPrice || "Discount should be less than regular price"
+                                                        validate: (value) =>
+                                                            value <= value.regularPrice || "Discount should be less than regular price"
                                                     })}
                                                     className="disabled:cursor-not-allowed py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                                 />
