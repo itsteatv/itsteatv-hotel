@@ -34,7 +34,7 @@ function CreateCabinForm() {
     })
 
     const onSubmitHandler = function (data) {
-        mutate(data);
+        mutate({ ...data, image: data.image[0] });
     }
 
     const onErrorHandler = function (error) { }
@@ -245,8 +245,12 @@ function CreateCabinForm() {
                                             <div className="relative">
                                                 <input
                                                     type="file"
-                                                    name="file-input"
-                                                    id="file-input"
+                                                    accept="image/*"
+                                                    name="image"
+                                                    id="image"
+                                                    {...register("image", {
+                                                        required: "This field is required",
+                                                    })}
                                                     className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-gray-700 dark:file:text-gray-400"
                                                 />
                                                 <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
