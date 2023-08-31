@@ -210,6 +210,7 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <textarea
+                                                    disabled={isAdding}
                                                     type="text"
                                                     id="description"
                                                     name="description"
@@ -244,6 +245,7 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
+                                                    disabled={isAdding}
                                                     type="file"
                                                     accept="image/*"
                                                     name="image"
