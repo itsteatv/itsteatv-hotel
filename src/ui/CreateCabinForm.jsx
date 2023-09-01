@@ -1,20 +1,40 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
-import { createCabin } from "../services/apiCabins"
+import { createEditCabin } from "../services/apiCabins"
 import { toast } from "react-hot-toast"
 import { MdOutlineAddTask } from "react-icons/md"
 import { GiChoppedSkull } from "react-icons/gi"
+import { useEffect } from "react"
 import('preline')
 
-function CreateCabinForm() {
-    const { register, handleSubmit, reset, getValues, formState } = useForm();
-    const { errors, isDirty, isValid } = formState;
-    console.log(errors);
+function CreateCabinForm({ editingCabin, editingMode }) {
+
+    const { register, handleSubmit, reset, getValues, formState, setValue } = useForm();
+
+    const { errors } = formState;
+
+    useEffect(() => {
+        if (editingMode) {
+            setValue('name', editingCabin.name);
+            setValue('maxCapacity', editingCabin.maxCapacity);
+            setValue('regularPrice', editingCabin.regularPrice);
+            setValue('discount', editingCabin.discount);
+            setValue('description', editingCabin.description);
+            setValue('image', editingCabin.image);
+        } else {
+            setValue('name', '');
+            setValue('maxCapacity', '');
+            setValue('regularPrice', '');
+            setValue('discount', '');
+            setValue('description', '');
+            setValue('image', []);
+        }
+    }, [editingMode, editingCabin, setValue]);
 
     const queryClient = useQueryClient();
 
-    const { isLoading: isAdding, mutate } = useMutation({
-        mutationFn: createCabin,
+    const { isLoading: isAdding, mutate: createCabin } = useMutation({
+        mutationFn: createEditCabin,
 
         onSuccess: () => {
             toast.success("New cabin successfully created", {
@@ -33,8 +53,33 @@ function CreateCabinForm() {
         }
     })
 
+    const { isLoading: isEditing, mutate: editCabin } = useMutation({
+        mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
+
+        onSuccess: () => {
+            toast.success("Cabin successfully edited", {
+                icon: <MdOutlineAddTask />,
+            }),
+                queryClient.invalidateQueries({
+                    queryKey: ["cabin"]
+                }),
+                reset();
+        },
+
+        onError: () => {
+            toast.error("Cabin Could not be edited", {
+                icon: <GiChoppedSkull />,
+            })
+        }
+    })
+
+    const isWorking = isAdding || isEditing;
+
     const onSubmitHandler = function (data) {
-        mutate({ ...data, image: data.image[0] });
+        const image = typeof data.image === "string" ? data.image : data.image[0];
+
+        if (editingMode) editCabin({ newCabinData: { ...data, image: image }, id: editingCabin.id });
+        else createCabin({ ...data, image: image });
     }
 
     const onErrorHandler = function (error) { }
@@ -62,7 +107,7 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
-                                                    disabled={isAdding}
+                                                    disabled={isWorking}
                                                     type="text"
                                                     id="name"
                                                     name="name"
@@ -97,7 +142,7 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
-                                                    disabled={isAdding}
+                                                    disabled={isWorking}
                                                     type="number"
                                                     id="maxCapacity"
                                                     name="maxCapacity"
@@ -136,7 +181,7 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
-                                                    disabled={isAdding}
+                                                    disabled={isWorking}
                                                     type="number"
                                                     id="regularPrice"
                                                     name="regularPrice"
@@ -172,11 +217,10 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <input
-                                                    disabled={isAdding}
+                                                    disabled={isWorking}
                                                     type="number"
                                                     id="discount"
                                                     name="discount"
-                                                    defaultValue={0}
                                                     {...register("discount", {
                                                         required: "This field is required",
                                                         validate: (value) =>
@@ -210,11 +254,10 @@ function CreateCabinForm() {
                                             </label>
                                             <div className="relative">
                                                 <textarea
-                                                    disabled={isAdding}
+                                                    disabled={isWorking}
                                                     type="text"
                                                     id="description"
                                                     name="description"
-                                                    defaultValue=""
                                                     {...register("description", {
                                                         required: "This field is required"
                                                     })}
@@ -237,21 +280,18 @@ function CreateCabinForm() {
                                         {/* End Form Group */}
                                         {/* Form Group */}
                                         <div>
-                                            <label
-                                                htmlFor="image"
-                                                className="block text-sm mb-2 dark:text-white"
-                                            >
+                                            <label htmlFor="image" className="block text-sm mb-2 dark:text-white">
                                                 Cabin photo
                                             </label>
                                             <div className="relative">
                                                 <input
-                                                    disabled={isAdding}
+                                                    disabled={isWorking}
                                                     type="file"
                                                     accept="image/*"
                                                     name="image"
                                                     id="image"
                                                     {...register("image", {
-                                                        required: "This field is required",
+                                                        required: editingMode ? false : "This Field is required"
                                                     })}
                                                     className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-gray-700 dark:file:text-gray-400"
                                                 />
@@ -267,15 +307,16 @@ function CreateCabinForm() {
                                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                                                     </svg>
                                                 </div>
+                                                {errors?.image?.message && <p className="text-red-600 mt-3">{errors.image.message}</p>}
                                             </div>
                                         </div>
+
                                         <button
-                                            // disabled={isAdding || !isValid || !isDirty}
-                                            disabled={isAdding}
+                                            disabled={isWorking}
                                             type="submit"
                                             className="disabled:cursor-not-allowed disabled:bg-gray-300 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                                         >
-                                            Create new cabin
+                                            {editingMode ? "Update Cabin" : "Create New Cabin"}
                                         </button>
                                         <button
                                             type="reset"

@@ -9,10 +9,12 @@ import { useState } from "react";
 
 function Table() {
     const [showForm, setShowForm] = useState(false);
+    const [editingCabin, setEditingCabin] = useState(null);
+    const [editingMode, setEditingMode] = useState(false);
 
     const queryClient = useQueryClient();
 
-    const { isLoading: isDeleting, isError, mutate } = useMutation({
+    const { isLoading: isDeleting, mutate } = useMutation({
         mutationFn: deleteCabin,
 
         onSuccess: () => {
@@ -39,8 +41,6 @@ function Table() {
     if (isLoading) {
         return <Spinner />
     }
-
-    console.log(cabins);
 
     return (
         <>
@@ -118,7 +118,12 @@ function Table() {
                                                     Duplicate
                                                 </button>
                                                 <button
-                                                    onClick={() => setShowForm(true)}
+                                                    onClick={() => {
+                                                        setEditingCabin(null);
+                                                        setEditingMode(false);
+                                                        setShowForm(true);
+                                                    }
+                                                    }
                                                     type="button"
                                                     data-hs-overlay="#hs-modal-signup"
                                                     className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
@@ -126,7 +131,13 @@ function Table() {
                                                     Add
                                                 </button>
                                                 <button
+                                                    onClick={() => {
+                                                        setEditingCabin(cabin);
+                                                        setShowForm(true);
+                                                        setEditingMode(true);
+                                                    }}
                                                     type="button"
+                                                    data-hs-overlay="#hs-modal-signup"
                                                     className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                                 >
                                                     Edit
@@ -147,7 +158,7 @@ function Table() {
                     </table>
                 </div>
             </div>
-            {showForm && <CreateCabinForm />}
+            {showForm && <CreateCabinForm editingCabin={editingCabin} editingMode={editingMode} />}
         </>
     );
 }
