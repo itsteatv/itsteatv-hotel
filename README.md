@@ -8,6 +8,6 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Creating new cabin added
 - [x] Handling & showing form error
 - [x] Uploading images to supbase
-- [ ] Editing cabin
+- [x] Editing cabin
 
 # still working on the project
