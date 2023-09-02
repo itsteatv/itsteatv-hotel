@@ -1,15 +1,15 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useForm } from "react-hook-form"
-import { createEditCabin } from "../services/apiCabins"
-import { toast } from "react-hot-toast"
-import { MdOutlineAddTask } from "react-icons/md"
-import { GiChoppedSkull } from "react-icons/gi"
+import { useForm } from "react-hook-form";
+import { useCreateCabin } from "../hooks/useCreateCabin";
+import { useEditCabin } from "../hooks/useEditCabin";
 import { useEffect } from "react"
 import('preline')
 
 function CreateCabinForm({ editingCabin, editingMode }) {
 
     const { register, handleSubmit, reset, getValues, formState, setValue } = useForm();
+
+    const { isAdding, createCabin } = useCreateCabin();
+    const { isEditing, editCabin } = useEditCabin();
 
     const { errors } = formState;
 
@@ -31,55 +31,21 @@ function CreateCabinForm({ editingCabin, editingMode }) {
         }
     }, [editingMode, editingCabin, setValue]);
 
-    const queryClient = useQueryClient();
-
-    const { isLoading: isAdding, mutate: createCabin } = useMutation({
-        mutationFn: createEditCabin,
-
-        onSuccess: () => {
-            toast.success("New cabin successfully created", {
-                icon: <MdOutlineAddTask />,
-            }),
-                queryClient.invalidateQueries({
-                    queryKey: ["cabin"]
-                }),
-                reset();
-        },
-
-        onError: () => {
-            toast.error("Cabin Could not be added", {
-                icon: <GiChoppedSkull />,
-            })
-        }
-    })
-
-    const { isLoading: isEditing, mutate: editCabin } = useMutation({
-        mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
-
-        onSuccess: () => {
-            toast.success("Cabin successfully edited", {
-                icon: <MdOutlineAddTask />,
-            }),
-                queryClient.invalidateQueries({
-                    queryKey: ["cabin"]
-                }),
-                reset();
-        },
-
-        onError: () => {
-            toast.error("Cabin Could not be edited", {
-                icon: <GiChoppedSkull />,
-            })
-        }
-    })
-
     const isWorking = isAdding || isEditing;
 
     const onSubmitHandler = function (data) {
         const image = typeof data.image === "string" ? data.image : data.image[0];
 
-        if (editingMode) editCabin({ newCabinData: { ...data, image: image }, id: editingCabin.id });
-        else createCabin({ ...data, image: image });
+        if (editingMode) editCabin({ newCabinData: { ...data, image: image }, id: editingCabin.id }, {
+            onSuccess: () => {
+                reset();
+            }
+        });
+        else createCabin({ ...data, image: image }, {
+            onSuccess: () => {
+                reset();
+            }
+        });
     }
 
     const onErrorHandler = function (error) { }

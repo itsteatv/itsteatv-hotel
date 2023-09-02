@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { getCabins } from "../services/apiCabins";
 import Spinner from "../ui/Spinner";
 import CreateCabinForm from "./CreateCabinForm";
 import { useState } from "react";
 import { useDeleteCabin } from "../hooks/useDeleteCabin";
+import { useCabin } from "../hooks/useCabin";
+import { useCreateCabin } from "../hooks/useCreateCabin";
 
 function Table() {
     const [showForm, setShowForm] = useState(false);
@@ -11,11 +11,22 @@ function Table() {
     const [editingMode, setEditingMode] = useState(false);
 
     const { isDeleting, deleteCabin } = useDeleteCabin();
+    const { createCabin } = useCreateCabin();
+    const { isLoading, cabins } = useCabin();
 
-    const { isLoading, data: cabins, error } = useQuery({
-        queryKey: ["cabin"],
-        queryFn: getCabins
-    })
+    const handleDuplicateCabin = (cabin) => {
+        const duplicatedCabin = {
+            name: `Copy of ${cabin.name}`,
+            maxCapacity: cabin.maxCapacity,
+            regularPrice: cabin.regularPrice,
+            description: cabin.description,
+            discount: cabin.discount,
+            image: cabin.image,
+        };
+
+        createCabin(duplicatedCabin);
+    };
+
 
     if (isLoading) {
         return <Spinner />
@@ -91,6 +102,7 @@ function Table() {
                                                 aria-labelledby="hs-dropdown-custom-icon-trigger"
                                             >
                                                 <button
+                                                    onClick={() => handleDuplicateCabin(cabin)}
                                                     type="button"
                                                     className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                                 >
