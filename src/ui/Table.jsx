@@ -66,7 +66,7 @@ function Table() {
                                         ${cabin.regularPrice}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {cabin.discount ? <p className="text-green-700">${cabin.discount}</p> : <p className="text-green-700">&mdash;</p>}
+                                        {cabin.discount ? <p className="text-green-700">${cabin.discount}</p> : <p className="text-green-700 pl-4">&mdash;</p>}
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="hs-dropdown relative inline-flex">
