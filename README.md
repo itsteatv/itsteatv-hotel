@@ -1,4 +1,5 @@
 # itsteatv hotel
+
 Full stack hotel . ReactJs + Tailwind + Supabase
 
 - [x] Header & Sidebar components added
@@ -9,5 +10,6 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Handling & showing form error
 - [x] Uploading images to supbase
 - [x] Editing cabin
+- [ ] Duplicating cabin
 
 # still working on the project
