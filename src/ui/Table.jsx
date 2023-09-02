@@ -1,37 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCabins, deleteCabin } from "../services/apiCabins";
-import { toast } from "react-hot-toast";
-import { MdDeleteForever } from "react-icons/md";
-import { GiChoppedSkull } from "react-icons/gi";
+import { useQuery } from "@tanstack/react-query";
+import { getCabins } from "../services/apiCabins";
 import Spinner from "../ui/Spinner";
 import CreateCabinForm from "./CreateCabinForm";
 import { useState } from "react";
+import { useDeleteCabin } from "../hooks/useDeleteCabin";
 
 function Table() {
     const [showForm, setShowForm] = useState(false);
     const [editingCabin, setEditingCabin] = useState(null);
     const [editingMode, setEditingMode] = useState(false);
 
-    const queryClient = useQueryClient();
-
-    const { isLoading: isDeleting, mutate } = useMutation({
-        mutationFn: deleteCabin,
-
-        onSuccess: () => {
-            toast.success("Cabin has been deleted successfully", {
-                icon: <MdDeleteForever />,
-            })
-            queryClient.invalidateQueries({
-                queryKey: ["cabin"]
-            })
-        },
-
-        onError: () => {
-            toast.error("Cabin Could not be deleted", {
-                icon: <GiChoppedSkull />,
-            })
-        }
-    })
+    const { isDeleting, deleteCabin } = useDeleteCabin();
 
     const { isLoading, data: cabins, error } = useQuery({
         queryKey: ["cabin"],
@@ -87,7 +66,7 @@ function Table() {
                                         ${cabin.regularPrice}
                                     </td>
                                     <td className="px-6 py-4">
-                                        <p className="text-green-700">${cabin.discount}</p>
+                                        {cabin.discount ? <p className="text-green-700">${cabin.discount}</p> : <p className="text-green-700">&mdash;</p>}
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="hs-dropdown relative inline-flex">
@@ -145,7 +124,7 @@ function Table() {
                                                 <button
                                                     type="button"
                                                     disabled={isDeleting}
-                                                    onClick={() => mutate(cabin.id)} className="disabled:cursor-not-allowed flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                                    onClick={() => deleteCabin(cabin.id)} className="disabled:cursor-not-allowed flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                                 >
                                                     Delete
                                                 </button>
@@ -157,8 +136,9 @@ function Table() {
                         </tbody>
                     </table>
                 </div>
-            </div>
-            {showForm && <CreateCabinForm editingCabin={editingCabin} editingMode={editingMode} />}
+            </div >
+            {showForm && <CreateCabinForm editingCabin={editingCabin} editingMode={editingMode} />
+            }
         </>
     );
 }
