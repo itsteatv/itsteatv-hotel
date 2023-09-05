@@ -11,6 +11,6 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Uploading images to supbase
 - [x] Editing cabin
 - [x] Duplicating cabin
-- [ ] Application setting
+- [x] Application setting
 
 # still working on the project
