@@ -4,10 +4,13 @@ import { useState } from "react";
 import { useDeleteCabin } from "../hooks/useDeleteCabin";
 import { useCabin } from "../hooks/useCabin";
 import { useCreateCabin } from "../hooks/useCreateCabin";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 function Table() {
     const [showForm, setShowForm] = useState(false);
+    const [showDeleteForm, setShowDeleteForm] = useState(false);
     const [editingCabin, setEditingCabin] = useState(null);
+    const [cabinId, setCabinId] = useState(null);
     const [editingMode, setEditingMode] = useState(false);
 
     const { isDeleting, deleteCabin } = useDeleteCabin();
@@ -27,6 +30,10 @@ function Table() {
         createCabin(duplicatedCabin);
     };
 
+    const handleDeleteCabin = (cabinId) => {
+        console.log("Delete button clicked for cabinId:", cabinId);
+        deleteCabin(cabinId);
+    };
 
     if (isLoading) {
         return <Spinner />
@@ -136,7 +143,14 @@ function Table() {
                                                 <button
                                                     type="button"
                                                     disabled={isDeleting}
-                                                    onClick={() => deleteCabin(cabin.id)} className="disabled:cursor-not-allowed flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                                    data-hs-overlay="#hs-danger-alert"
+                                                    onClick={() => {
+                                                        // deleteCabin(cabin.id)
+                                                        console.log("Delete button clicked with cabinId:", cabin.id);
+                                                        setCabinId(cabin.id);
+                                                        setShowDeleteForm(true);
+                                                    }}
+                                                    className="disabled:cursor-not-allowed flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                                 >
                                                     Delete
                                                 </button>
@@ -151,6 +165,7 @@ function Table() {
             </div >
             {showForm && <CreateCabinForm editingCabin={editingCabin} editingMode={editingMode} />
             }
+            {showDeleteForm && <ConfirmDeleteModal isDeleting={isDeleting} onDeleteCabin={handleDeleteCabin} cabinId={cabinId} />}
         </>
     );
 }
