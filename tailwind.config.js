@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        "mobile": { "min": "15.625em", "max": "43.75em" },
+        "mobile": { "min": "15.625em", "max": "48.75em" },
         "settingForm": { "min": "9.375em", "max": "37.5em" },
       },
       fontSize: {
