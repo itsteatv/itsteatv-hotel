@@ -6,6 +6,7 @@ import { useCabin } from "../hooks/useCabin";
 import { useCreateCabin } from "../hooks/useCreateCabin";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import FilterCabinDiscount from "./FilterCabinDiscount";
+import { useSearchParams } from "react-router-dom";
 
 function Table() {
     const [showForm, setShowForm] = useState(false);
@@ -13,10 +14,30 @@ function Table() {
     const [editingCabin, setEditingCabin] = useState(null);
     const [cabinId, setCabinId] = useState(null);
     const [editingMode, setEditingMode] = useState(false);
+    const [searchParams] = useSearchParams();
 
     const { isDeleting, deleteCabin } = useDeleteCabin();
     const { createCabin } = useCreateCabin();
     const { isLoading, cabins } = useCabin();
+    const filterValue = searchParams.get("discount") || "all";
+
+    if (!cabins) {
+        return <Spinner />;
+    }
+
+    let filteredCabins;
+
+    if (filterValue === "all") {
+        filteredCabins = cabins;
+    }
+
+    if (filterValue === "no-discount") {
+        filteredCabins = cabins.filter(cabin => cabin.discount === 0)
+    }
+
+    if (filterValue === "with-discount") {
+        filteredCabins = cabins.filter(cabin => cabin.discount > 0)
+    }
 
     const handleDuplicateCabin = (cabin) => {
         const duplicatedCabin = {
@@ -70,7 +91,7 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {cabins.map((cabin) => (
+                                {filteredCabins.map((cabin) => (
                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={cabin.id}>
                                         <td>
                                             <img className="rounded w-20 m-4" src={cabin.image} alt="cabin image" />
