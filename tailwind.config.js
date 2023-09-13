@@ -10,6 +10,7 @@ export default {
     extend: {
       screens: {
         "mobile": { "min": "15.625em", "max": "48.75em" },
+        "filteringDiscount": { "min": "15.625em", "max": "40em" },
         "settingForm": { "min": "9.375em", "max": "37.5em" },
       },
       fontSize: {
