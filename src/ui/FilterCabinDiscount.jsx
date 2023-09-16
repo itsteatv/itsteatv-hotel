@@ -26,7 +26,7 @@ function FilterCabinDiscount() {
                     <button
                         type="button"
                         className={`${activeTab === 'all'
-                            ? 'filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
+                            ? 'disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
                             : 'filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg '
                             } `}
                         id="hs-tab-to-select-item-1"
@@ -36,13 +36,14 @@ function FilterCabinDiscount() {
                         }}
                         role="tab"
                         aria-selected={activeTab === 'all'}
+                        disabled={activeTab === 'all'}
                     >
                         All
                     </button>
                     <button
                         type="button"
                         className={`${activeTab === 'no-discount'
-                            ? 'filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
+                            ? 'disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
                             : 'filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg '
                             } `}
                         id="hs-tab-to-select-item-2"
@@ -52,13 +53,14 @@ function FilterCabinDiscount() {
                         }}
                         role="tab"
                         aria-selected={activeTab === 'no-discount'}
+                        disabled={activeTab === 'no-discount'}
                     >
                         No discount
                     </button>
                     <button
                         type="button"
                         className={`${activeTab === 'with-discount'
-                            ? 'filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
+                            ? 'disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
                             : 'filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg '
                             } `}
                         id="hs-tab-to-select-item-3"
@@ -67,6 +69,7 @@ function FilterCabinDiscount() {
                             handleTabChange("with-discount");
                         }} role="tab"
                         aria-selected={activeTab === 'with-discount'}
+                        disabled={activeTab === 'with-discount'}
                     >
                         With discount
                     </button>
