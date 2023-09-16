@@ -26,8 +26,8 @@ function FilterCabinDiscount() {
                     <button
                         type="button"
                         className={`${activeTab === 'all'
-                            ? 'disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
-                            : 'filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg '
+                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
+                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg '
                             } `}
                         id="hs-tab-to-select-item-1"
                         onClick={() => {
@@ -43,8 +43,8 @@ function FilterCabinDiscount() {
                     <button
                         type="button"
                         className={`${activeTab === 'no-discount'
-                            ? 'disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
-                            : 'filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg '
+                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none hover:text-blue-600 dark:hover:text-gray-400 active'
+                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none'
                             } `}
                         id="hs-tab-to-select-item-2"
                         onClick={() => {
@@ -60,8 +60,8 @@ function FilterCabinDiscount() {
                     <button
                         type="button"
                         className={`${activeTab === 'with-discount'
-                            ? 'disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
-                            : 'filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg '
+                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none hover:text-blue-600 dark:hover:text-gray-400 active'
+                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none'
                             } `}
                         id="hs-tab-to-select-item-3"
                         onClick={() => {
