@@ -13,5 +13,6 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Duplicating cabin
 - [x] Application setting
 - [x] Filtering cabins (based on discount)
+- [ ] Sorting cabins
 
 # still working on the project
