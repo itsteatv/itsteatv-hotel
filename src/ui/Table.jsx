@@ -4,9 +4,10 @@ import { useState } from "react";
 import { useDeleteCabin } from "../hooks/useDeleteCabin";
 import { useCabin } from "../hooks/useCabin";
 import { useCreateCabin } from "../hooks/useCreateCabin";
+import { useSearchParams } from "react-router-dom";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import FilterCabinDiscount from "./FilterCabinDiscount";
-import { useSearchParams } from "react-router-dom";
+import SortBy from "./SortBy";
 
 function Table() {
     const [showForm, setShowForm] = useState(false);
@@ -57,15 +58,21 @@ function Table() {
         deleteCabin(cabinId);
     };
 
+    const sortBy = searchParams.get("sortBy") || "startDate-asc";
+    const [field, direction] = sortBy.split("-");
+    const modifier = direction === "asc" ? 1 : -1;
+    const sortedCabins = filteredCabins.sort((a, b) => (a[field] - b[field]) * modifier);
+
     if (isLoading) {
         return <Spinner />
     }
 
     return (
         <>
-            <div className="h-screen flex items-center justify-center mobile:mx-5">
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+            <div className="flex items-center justify-center mobile:mx-5">
+                <div className="mb-4 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
                     <FilterCabinDiscount />
+                    <SortBy />
                     <div className="max-w-full relative overflow-x-auto shadow-md">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -89,9 +96,16 @@ function Table() {
                                         ACTION
                                     </th>
                                 </tr>
+                                {filteredCabins.length === 0 && (
+                                    <tr>
+                                        <td colSpan="6" className="text-center py-4 font-bold">
+                                            No cabins match the selected filter.
+                                        </td>
+                                    </tr>
+                                )}
                             </thead>
                             <tbody>
-                                {filteredCabins.map((cabin) => (
+                                {sortedCabins.map((cabin) => (
                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={cabin.id}>
                                         <td>
                                             <img className="rounded w-20 m-4" src={cabin.image} alt="cabin image" />
