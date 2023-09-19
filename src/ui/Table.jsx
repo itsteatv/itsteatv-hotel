@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import FilterCabinDiscount from "./FilterCabinDiscount";
 import SortBy from "./SortBy";
+import NoData from "./NoData";
 
 function Table() {
     const [showForm, setShowForm] = useState(false);
@@ -67,6 +68,10 @@ function Table() {
         return <Spinner />
     }
 
+    if (!cabins.length) {
+        return <NoData error="Cabins" />
+    }
+
     return (
         <>
             <div className="flex items-center justify-center mobile:mx-5">
@@ -96,13 +101,6 @@ function Table() {
                                         ACTION
                                     </th>
                                 </tr>
-                                {filteredCabins.length === 0 && (
-                                    <tr>
-                                        <td colSpan="6" className="text-center py-4 font-bold">
-                                            No cabins match the selected filter.
-                                        </td>
-                                    </tr>
-                                )}
                             </thead>
                             <tbody>
                                 {sortedCabins.map((cabin) => (
