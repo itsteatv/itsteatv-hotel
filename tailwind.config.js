@@ -20,6 +20,7 @@ export default {
       }
     },
   },
+  darkMode: 'class',
   plugins: [
     require('flowbite/plugin'),
     require('preline/plugin'),

@@ -75,12 +75,12 @@ function Table() {
     return (
         <>
             <div className="flex items-center justify-center mobile:mx-5">
-                <div className="mb-4 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+                <div className="mb-4 relative overflow-x-auto shadow-md  mt-10">
                     <FilterCabinDiscount />
                     <SortBy />
                     <div className="max-w-full relative overflow-x-auto shadow-md">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">
                                         <span className="sr-only">Image</span>
@@ -104,7 +104,7 @@ function Table() {
                             </thead>
                             <tbody>
                                 {sortedCabins.map((cabin) => (
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={cabin.id}>
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:border hover:bg-gray-50 dark:hover:bg-gray-600" key={cabin.id}>
                                         <td>
                                             <img className="rounded w-20 m-4" src={cabin.image} alt="cabin image" />
                                         </td>

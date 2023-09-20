@@ -1,4 +1,5 @@
 import 'flowbite';
+import ThemeSwitcher from './ThemeSwitcher';
 
 function Header() {
   return (
@@ -33,6 +34,7 @@ function Header() {
             </span>
           </div>
           <div className="flex items-center">
+            <ThemeSwitcher />
             <div className="flex items-center ml-3">
               <div>
                 <button

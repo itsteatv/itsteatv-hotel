@@ -18,17 +18,17 @@ function FilterCabinDiscount() {
 
     return (
         <div className="relative">
-            <div className="sm:block bg-gray-50 border-gray-200 dark:border-gray-700">
+            <div className="sm:block bg-gray-50 border-gray-200 dark:border-gray-700 dark:bg-gray-800">
                 <nav
-                    className="filteringDiscount:flex-col flex flex-row items-end justify-end space-x-2 border-b"
+                    className="filteringDiscount:flex-col flex flex-row items-end justify-end space-x-2 border-b dark:border-gray-700"
                     aria-label="Tabs"
                     role="tablist"
                 >
                     <button
                         type="button"
                         className={`${activeTab === 'all'
-                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 active'
-                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg '
+                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg hover:text-blue-600 dark:hover:text-gray-400 dark:border-gray-700 active'
+                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg dark:text-white dark:border-gray-700'
                             } `}
                         id="hs-tab-to-select-item-1"
                         onClick={() => {
@@ -44,8 +44,8 @@ function FilterCabinDiscount() {
                     <button
                         type="button"
                         className={`${activeTab === 'no-discount'
-                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none hover:text-blue-600 dark:hover:text-gray-400 active'
-                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none'
+                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none hover:text-blue-600 dark:hover:text-gray-400 dark:border-gray-700 active'
+                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none dark:text-white dark:border-gray-700'
                             } `}
                         id="hs-tab-to-select-item-2"
                         onClick={() => {
@@ -61,8 +61,8 @@ function FilterCabinDiscount() {
                     <button
                         type="button"
                         className={`${activeTab === 'with-discount'
-                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none hover:text-blue-600 dark:hover:text-gray-400 active'
-                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none'
+                            ? 'w-full disabled:cursor-not-allowed filteringDiscount:w-full text-blue-400 py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none hover:text-blue-600 dark:hover:text-gray-400 dark:border-gray-700 active'
+                            : 'w-full filteringDiscount:w-full py-3 px-4 inline-flex items-center gap-2 text-sm font-medium text-center border border-b-0 border-t-1 border-r-1 border-l-1 rounded-t-lg filteringDiscount:rounded-t-none dark:text-white dark:border-gray-700'
                             } `}
                         id="hs-tab-to-select-item-3"
                         onClick={() => {
