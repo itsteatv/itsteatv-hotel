@@ -1,6 +1,7 @@
-import { NavLink } from 'react-router-dom';
 import 'flowbite';
+import { NavLink } from 'react-router-dom';
 import { AiOutlineMenu, AiOutlineHome, AiOutlineCalendar, AiOutlineShop, AiOutlineUsergroupAdd, AiOutlineSetting } from "react-icons/ai"
+import Uploader from '../data/Uploader';
 
 function Sidebar() {
   return (
@@ -73,6 +74,7 @@ function Sidebar() {
                 <span className="flex-1 ml-3 whitespace-nowrap">Settings</span>
               </NavLink>
             </li>
+            <Uploader />
           </ul>
         </div>
       </aside>
