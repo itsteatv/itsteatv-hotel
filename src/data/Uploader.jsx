@@ -55,10 +55,10 @@ async function createBookings() {
     const finalBookings = bookings.map((booking) => {
         // Here relying on the order of cabins, as they don't have and ID yet
         const cabin = cabins.at(booking.cabinId - 1);
-        const numNights = subtractDates(booking.endDate, booking.startDate);
-        const cabinPrice = numNights * (cabin.regularPrice - cabin.discount);
+        const numberNights = subtractDates(booking.endDate, booking.startDate);
+        const cabinPrice = numberNights * (cabin.regularPrice - cabin.discount);
         const extrasPrice = booking.hasBreakfast
-            ? numNights * 15 * booking.numGuests
+            ? numberNights * 15 * booking.numberGuests
             : 0; // hardcoded breakfast price
         const totalPrice = cabinPrice + extrasPrice;
 
@@ -83,7 +83,7 @@ async function createBookings() {
 
         return {
             ...booking,
-            numNights,
+            numberNights,
             cabinPrice,
             extrasPrice,
             totalPrice,
@@ -128,7 +128,7 @@ function Uploader() {
         <div
             className="bg-gray-50 dark:bg-gray-800"
         >
-            <h3 className="w-full text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">SAMPLE DATA</h3>
+            <h3 className="w-full text-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">SAMPLE DATA</h3>
 
             <button onClick={uploadAll} disabled={isLoading}
                 className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500
