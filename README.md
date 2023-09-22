@@ -16,6 +16,6 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Sorting cabins
 - [x] Dark mode
 - [x] Getting booking table from api
-- [ ] Uploading sample data
+- [x] Uploading sample data
 
 # still working on the project
