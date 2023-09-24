@@ -5,6 +5,8 @@ import { format, isToday } from 'date-fns';
 import { formatCurrency } from '../utils/helpers';
 import { formatDistanceFromNow } from '../utils/helpers';
 import StatusBadge from "../ui/StatusBadge";
+import SortBy from "../ui/SortBy";
+import BookingStatusFilter from "../ui/BookingStatusFilter"
 
 function Bookings() {
   const { bookings, isLoading } = useBookings();
@@ -24,6 +26,8 @@ function Bookings() {
     <>
       <div className="flex items-center justify-center bookingTable:mx-5">
         <div className="mb-4 relative overflow-x-auto shadow-md sm:rounded-t-lg mt-10">
+          <BookingStatusFilter />
+          <SortBy />
           <div className="max-w-full relative overflow-x-auto shadow-md">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -151,4 +155,3 @@ function Bookings() {
 }
 
 export default Bookings;
-
