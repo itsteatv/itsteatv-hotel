@@ -7,10 +7,10 @@ import { formatDistanceFromNow } from '../utils/helpers';
 import StatusBadge from "../ui/StatusBadge";
 import BookingsSortBy from "../ui/BookingsSortBy";
 import BookingStatusFilter from "../ui/BookingStatusFilter"
+import BookingsPagination from "../ui/BookingsPagination";
 
 function Bookings() {
   const { bookings, isLoading } = useBookings();
-  console.log(bookings);
 
   if (isLoading) {
     return <Spinner />;
@@ -150,6 +150,7 @@ function Bookings() {
           </div>
         </div>
       </div >
+      <BookingsPagination />
     </>
   );
 }

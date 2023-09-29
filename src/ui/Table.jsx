@@ -57,7 +57,6 @@ function Table() {
     };
 
     const handleDeleteCabin = (cabinId) => {
-        console.log("Delete button clicked for cabinId:", cabinId);
         deleteCabin(cabinId);
     };
 
@@ -224,7 +223,6 @@ function Table() {
                                                         data-hs-overlay="#hs-danger-alert"
                                                         onClick={() => {
                                                             // deleteCabin(cabin.id)
-                                                            console.log("Delete button clicked with cabinId:", cabin.id);
                                                             setCabinId(cabin.id);
                                                             setShowDeleteForm(true);
                                                         }}

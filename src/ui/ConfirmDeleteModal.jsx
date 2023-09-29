@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 function ConfirmDeleteModal({ onDeleteCabin, cabinId, isDeleting }) {
-    console.log(cabinId);
 
     const [isOpen, setIsOpen] = useState(true);
 
@@ -80,7 +79,6 @@ function ConfirmDeleteModal({ onDeleteCabin, cabinId, isDeleting }) {
                                 <button
                                     disabled={isDeleting}
                                     onClick={() => {
-                                        console.log("Delete personal account button clicked");
                                         onDeleteCabin(cabinId);
                                     }}
                                     data-hs-overlay="#hs-danger-alert"
