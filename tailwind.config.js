@@ -13,6 +13,7 @@ export default {
         "bookingTable": { "min": "9.375em", "max": "56.25em" },
         "filteringDiscount": { "min": "9.375em", "max": "40em" },
         "settingForm": { "min": "9.375em", "max": "37.5em" },
+        "extraSmall": { "min": "9.375em", "max": "28.125em" },
       },
       fontSize: {
         clamp: "clamp(0.75rem, 2.3vw + 0.5rem, 1.875rem)",
