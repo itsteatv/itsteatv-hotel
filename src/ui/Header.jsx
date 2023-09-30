@@ -30,7 +30,7 @@ function Header() {
               </svg>
             </button>
             <span className="self-center text-xl font-semibold sm:text-2xl ml-2 whitespace-nowrap dark:text-white">
-              Full Stack Hotel
+              itsteatv Hotel
             </span>
           </div>
           <div className="flex items-center">
