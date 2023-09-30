@@ -150,7 +150,7 @@ function Bookings() {
           </div>
         </div>
       </div >
-      <BookingsPagination />
+      <BookingsPagination count={15} />
     </>
   );
 }
