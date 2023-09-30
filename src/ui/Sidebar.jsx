@@ -39,9 +39,6 @@ function Sidebar() {
               >
                 <AiOutlineCalendar size={25} />
                 <span className="flex-1 ml-3 whitespace-nowrap">Bookings</span>
-                <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                  Pro
-                </span>
               </NavLink>
             </li>
             <li>
@@ -51,9 +48,6 @@ function Sidebar() {
               >
                 <AiOutlineShop size={25} />ّ
                 <span className="flex-1 ml-3 whitespace-nowrap">Cabins</span>
-                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                  3
-                </span>
               </NavLink>
             </li>
             <li>
