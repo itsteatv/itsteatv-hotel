@@ -1,13 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
-
-const PAGE_SIZE = 10;
+import { PAGE_SIZE } from "../utils/constants";
 
 function BookingsPagination({ count }) {
     const [searchParams, setSearchParams] = useSearchParams();
     const currentPage = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
     const pageCount = Math.ceil(count / PAGE_SIZE);
-    console.log((currentPage - 1) * PAGE_SIZE + 1);
 
     const nextPage = function () {
         const next = currentPage === pageCount ? currentPage : currentPage + 1;
