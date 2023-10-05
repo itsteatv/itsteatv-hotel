@@ -20,6 +20,7 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Filtering Bookings
 - [x] Sorting Bookings
 - [x] Searching Cabins
-- [ ] Pagination for bookings
+- [x] Pagination for bookings
+- [ ] Booking detail page
 
 # still working on the project
