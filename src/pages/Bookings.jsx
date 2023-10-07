@@ -8,9 +8,11 @@ import StatusBadge from "../ui/StatusBadge";
 import BookingsSortBy from "../ui/BookingsSortBy";
 import BookingStatusFilter from "../ui/BookingStatusFilter"
 import BookingsPagination from "../ui/BookingsPagination";
+import { useNavigate } from "react-router-dom";
 
 function Bookings() {
   const { bookings, isLoading } = useBookings();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <Spinner />;
@@ -107,7 +109,7 @@ function Bookings() {
                           aria-labelledby="hs-dropdown-custom-icon-trigger"
                         >
                           <button
-                            // onClick={() => handleDuplicateCabin(cabin)}
+                            onClick={() => navigate(`/bookings/${booking.id}`)}
                             type="button"
                             className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                           >

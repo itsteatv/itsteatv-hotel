@@ -7,6 +7,10 @@ export default {
     'node_modules/preline/dist/*.js',
   ],
   theme: {
+    fontFamily: {
+      'Inter': ['Inter', 'sans-serif'],
+      'Poppins': ['"Poppins"', 'sans-serif']
+    },
     extend: {
       screens: {
         "mobile": { "min": "9.375em", "max": "48.75em" },
