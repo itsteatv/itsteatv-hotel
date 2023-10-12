@@ -42,7 +42,5 @@ export function useBookings() {
         })
     }
 
-    console.log(bookings?.data);
-
     return { isLoading, error, bookings }
 }
