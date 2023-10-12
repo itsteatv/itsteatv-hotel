@@ -14,7 +14,7 @@ function PageNotFound() {
 
   return (
     <main>
-      <div className="bg-red-700 max-w-screen-xl mx-auto px-4 flex items-center justify-start h-screen md:px-8">
+      <div className="bg-red-700 mx-auto px-4 flex items-center justify-start h-screen md:px-8">
         <div className="max-w-lg mx-auto space-y-3 text-center">
           <h3 className="text-white font-semibold">
             404 Error
