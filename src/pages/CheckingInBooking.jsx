@@ -4,20 +4,35 @@ import { format, isToday } from 'date-fns';
 import { formatCurrency } from '../utils/helpers';
 import { formatDistanceFromNow } from '../utils/helpers';
 import { MdOutlineBreakfastDining, MdOutlinePermIdentity, MdOutlineDriveFileRenameOutline, MdCabin, MdOutlineEmojiFlags } from "react-icons/md"
+import { BsChatLeftQuote } from "react-icons/bs"
 import { HiOutlineMail } from "react-icons/hi"
 import { useMoveBack } from "../hooks/useMoveBack"
 import StatusBadge from "../ui/StatusBadge";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useCheckIn } from "../hooks/useCheckIn";
 
 function Booking() {
     const { isLoading, singleBooking } = useSingleBooking();
+    const { checkIn, isCheckingIn } = useCheckIn();
+
+    const [confirmPaid, setConfirmPaid] = useState(false);
+
+    useEffect(() => {
+        // setConfirmPaid(singleBooking?.isPaid || false)
+        setConfirmPaid(singleBooking?.isPaid ?? false)
+    }, [singleBooking?.isPaid])
+
     const navigate = useNavigate();
     const moveBack = useMoveBack();
 
-    console.log(singleBooking);
-
     if (isLoading) {
         return <Spinner />;
+    }
+
+    const handleCheckIn = function () {
+        if (!confirmPaid) return;
+        checkIn(singleBooking?.id)
     }
 
     return (
@@ -25,7 +40,7 @@ function Booking() {
             <div className="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg pricing-box lg:max-w-none lg:flex">
                 <div className="px-6 py-8 bg-white dark:bg-gray-800 lg:flex-shrink-1 lg:p-12">
                     <h3 className="flex items-center gap-x-2 text-2xl font-extrabold leading-8 text-gray-900 sm:text-3xl sm:leading-9 dark:text-white">
-                        Booking #{singleBooking?.id} <StatusBadge status={singleBooking.status} />
+                        Booking #{singleBooking?.id} <StatusBadge status={singleBooking?.status} />
                     </h3>
                     <p className="mt-6 text-base leading-6 font-Inter text-gray-500 dark:text-gray-200">
                         {format(new Date(singleBooking?.startDate), 'EEE, MMM dd yyyy')} (
@@ -89,6 +104,18 @@ function Booking() {
                                 </div>
                                 <p className="flex gap-x-2 ml-3 text-sm leading-5 text-gray-700 dark:text-gray-200">
                                     Your from {singleBooking?.guests.countryFlag ? <img className="max-w-[2rem] rounded-sm block" src={singleBooking?.guests.countryFlag} /> : ""}
+                                </p>
+                            </li>
+                            <li className="flex items-start lg:col-span-1">
+                                <div className="flex-shrink-0">
+                                    <BsChatLeftQuote className="dark:text-white mt-1" size={25} />
+                                </div>
+                                <p className="flex gap-x-2 ml-3 text-sm leading-5 text-gray-700 dark:text-gray-200 font-Inter">
+                                    {singleBooking?.observation ?
+                                        <span className="flex mt-1 text-gray-700 dark:text-gray-200">observation : {singleBooking?.observation}</span>
+                                        :
+                                        ""
+                                    }
                                 </p>
                             </li>
                         </ul>
@@ -161,22 +188,38 @@ function Booking() {
                                 ` (${formatCurrency(singleBooking?.cabinPrice)} cabin)`
                             }
                         </span>
+                        {/* INPUT */}
+                        <div className="flex items-center justify-center mt-4">
+                            <input
+                                id="confirm"
+                                type="checkbox"
+                                checked={confirmPaid}
+                                disabled={confirmPaid || isCheckingIn}
+                                onChange={() => setConfirmPaid((confirm) => !confirm)}
+                                className="w-4 h-4 disabled:cursor-not-allowed disabled:text-gray-300 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            />
+                            <label
+                                htmlFor="confirm"
+                                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            >
+                                I confirm that {singleBooking?.guests.fullName} has paid the {" "}
+                                <a href="#" className="text-blue-600 dark:text-blue-500 hover:underline">
+                                    total amount of {formatCurrency(singleBooking?.totalPrice)}
+                                </a>
+                                .
+                            </label>
+                        </div>
                     </p>
                     <div className="mt-6">
                         <div className="rounded-md flex flex-col gap-y-2 lg:flex-row lg:gap-x-2">
-                            {singleBooking.status === "unconfirmed" && <button
-                                onClick={() => navigate(`/checkIn/${singleBooking.id}`)}
+                            {singleBooking?.status === "unconfirmed" && <button
+                                onClick={handleCheckIn}
                                 type="button"
-                                className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
+                                disabled={!confirmPaid || isCheckingIn}
+                                className="py-2 px-4 disabled:cursor-not-allowed disabled:bg-gray-300 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
                             >
-                                Check in
+                                Check in booking #{singleBooking?.id}
                             </button>}
-                            <button
-                                type="button"
-                                className="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
-                            >
-                                Delete booking
-                            </button>
                             <button
                                 type="button"
                                 onClick={moveBack}
