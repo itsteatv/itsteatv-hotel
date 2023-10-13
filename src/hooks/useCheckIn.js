@@ -8,9 +8,10 @@ export function useCheckIn() {
     const navigate = useNavigate();
 
     const { mutate: checkIn, isLoading: isCheckingIn, isError: isCheckInError } = useMutation({
-        mutationFn: (bookingId) => updateBooking(bookingId, {
+        mutationFn: ({ bookingId, breakfast }) => updateBooking(bookingId, {
             status: "checked-in",
-            isPaid: true
+            isPaid: true,
+            ...breakfast
         }),
 
         onSuccess: (data) => {
@@ -19,6 +20,7 @@ export function useCheckIn() {
                     active: true,
                 })
             navigate("/");
+            window.location.reload();
         },
 
         onError: () => {

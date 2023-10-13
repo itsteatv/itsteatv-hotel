@@ -11,12 +11,17 @@ import StatusBadge from "../ui/StatusBadge";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCheckIn } from "../hooks/useCheckIn";
+import { useSettings } from "../hooks/useSettings";
 
 function Booking() {
     const { isLoading, singleBooking } = useSingleBooking();
     const { checkIn, isCheckingIn } = useCheckIn();
+    const { settings, isLoading: isLoadingSetting } = useSettings();
+
+    console.log(singleBooking);
 
     const [confirmPaid, setConfirmPaid] = useState(false);
+    const [addBreakfast, setAddBreakfast] = useState(false);
 
     useEffect(() => {
         // setConfirmPaid(singleBooking?.isPaid || false)
@@ -25,15 +30,29 @@ function Booking() {
 
     const navigate = useNavigate();
     const moveBack = useMoveBack();
+    const bookingId = singleBooking?.id
 
-    if (isLoading) {
+    if (isLoading || isLoadingSetting) {
         return <Spinner />;
     }
 
     const handleCheckIn = function () {
         if (!confirmPaid) return;
-        checkIn(singleBooking?.id)
+
+        if (addBreakfast) {
+            checkIn({
+                bookingId, breakfast: {
+                    hasBreakfast: true,
+                    extrasPrice: optionalBreakfastPrice,
+                    totalPrice: singleBooking?.totalPrice + optionalBreakfastPrice
+                }
+            });
+        } else {
+            checkIn({ bookingId, breakfast: {} })
+        }
     }
+
+    const optionalBreakfastPrice = settings?.breakfastPrice * singleBooking?.numberNights * singleBooking?.numberGuests;
 
     return (
         <div className="flex items-center justify-center mt-8 px-4 mx-auto sm:px-6 lg:px-8">
@@ -106,64 +125,16 @@ function Booking() {
                                     Your from {singleBooking?.guests.countryFlag ? <img className="max-w-[2rem] rounded-sm block" src={singleBooking?.guests.countryFlag} /> : ""}
                                 </p>
                             </li>
-                            <li className="flex items-start lg:col-span-1">
+                            {singleBooking?.observation ? <li className="flex items-start lg:col-span-1">
                                 <div className="flex-shrink-0">
                                     <BsChatLeftQuote className="dark:text-white mt-1" size={25} />
                                 </div>
                                 <p className="flex gap-x-2 ml-3 text-sm leading-5 text-gray-700 dark:text-gray-200 font-Inter">
-                                    {singleBooking?.observation ?
-                                        <span className="flex mt-1 text-gray-700 dark:text-gray-200">observation : {singleBooking?.observation}</span>
-                                        :
-                                        ""
-                                    }
+                                    <span className="flex mt-1 text-gray-700 dark:text-gray-200">observation : {singleBooking?.observation}</span>
                                 </p>
-                            </li>
+                            </li> : ""}
                         </ul>
                     </div>
-                    {/* <div className="mt-8">
-                        <div className="flex items-center">
-                            <h4 className="flex-shrink-0 pr-4 text-sm font-semibold leading-5 tracking-wider text-indigo-600 uppercase bg-white dark:bg-gray-800">
-                                &amp; What's not
-                            </h4>
-                        </div>
-                        <ul className="mt-8 lg:grid lg:grid-cols-2 lg:col-gap-8 lg:row-gap-5">
-                            <li className="flex items-start lg:col-span-1">
-                                <div className="flex-shrink-0">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={6}
-                                        height={6}
-                                        className="w-6 h-6 mr-2"
-                                        fill="red"
-                                        viewBox="0 0 1792 1792"
-                                    >
-                                        <path d="M1277 1122q0-26-19-45l-181-181 181-181q19-19 19-45 0-27-19-46l-90-90q-19-19-46-19-26 0-45 19l-181 181-181-181q-19-19-45-19-27 0-46 19l-90 90q-19 19-19 46 0 26 19 45l181 181-181 181q-19 19-19 45 0 27 19 46l90 90q19 19 46 19 26 0 45-19l181-181 181 181q19 19 45 19 27 0 46-19l90-90q19-19 19-46zm387-226q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
-                                    </svg>
-                                </div>
-                                <p className="ml-3 text-sm leading-5 text-gray-700 dark:text-gray-200">
-                                    No Contracts. No monthly, setup, or additional payment processor
-                                    fees
-                                </p>
-                            </li>
-                            <li className="flex items-start lg:col-span-1">
-                                <div className="flex-shrink-0">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={6}
-                                        height={6}
-                                        className="w-6 h-6 mr-2"
-                                        fill="red"
-                                        viewBox="0 0 1792 1792"
-                                    >
-                                        <path d="M1277 1122q0-26-19-45l-181-181 181-181q19-19 19-45 0-27-19-46l-90-90q-19-19-46-19-26 0-45 19l-181 181-181-181q-19-19-45-19-27 0-46 19l-90 90q-19 19-19 46 0 26 19 45l181 181-181 181q-19 19-19 45 0 27 19 46l90 90q19 19 46 19 26 0 45-19l181-181 181 181q19 19 45 19 27 0 46-19l90-90q19-19 19-46zm387-226q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
-                                    </svg>
-                                </div>
-                                <p className="ml-3 text-sm leading-5 text-gray-700 dark:text-gray-200">
-                                    No 2-week on-boarding, it takes 20 minutes!
-                                </p>
-                            </li>
-                        </ul>
-                    </div> */}
                 </div>
                 <div className="px-6 py-8 mb-3 rounded-md text-center bg-gray-50 dark:bg-gray-700 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
                     <p className="text-lg font-bold leading-6 text-gray-900 dark:text-white">
@@ -172,7 +143,7 @@ function Booking() {
                     <div className="flex items-center justify-center mt-4 text-5xl font-extrabold leading-none text-gray-900 dark:text-white">
                         <span className="flex flex-col">
                             <span className="font-Inter text-sm">Total price :</span>
-                            {formatCurrency(singleBooking?.totalPrice)}
+                            {!addBreakfast ? formatCurrency(singleBooking?.totalPrice) : formatCurrency(singleBooking?.totalPrice + optionalBreakfastPrice)}
                         </span>
                     </div>
                     <p className="mt-4 text-sm leading-5">
@@ -180,9 +151,9 @@ function Booking() {
                             More details:
                         </span>
                         <span className="inline-block font-medium text-gray-500  dark:text-gray-400">
-                            {singleBooking?.hasBreakfast ?
+                            {addBreakfast || singleBooking?.hasBreakfast ?
                                 ` (${formatCurrency(singleBooking?.cabinPrice)} cabin + ${formatCurrency(
-                                    singleBooking?.extrasPrice
+                                    optionalBreakfastPrice || singleBooking?.extrasPrice
                                 )} breakfast)`
                                 :
                                 ` (${formatCurrency(singleBooking?.cabinPrice)} cabin)`
@@ -203,12 +174,34 @@ function Booking() {
                                 className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                             >
                                 I confirm that {singleBooking?.guests.fullName} has paid the {" "}
-                                <a href="#" className="text-blue-600 dark:text-blue-500 hover:underline">
-                                    total amount of {formatCurrency(singleBooking?.totalPrice)}
+                                <a className="text-blue-600 dark:text-blue-500">
+                                    total amount of {!addBreakfast ? formatCurrency(singleBooking?.totalPrice) : formatCurrency(singleBooking?.totalPrice + optionalBreakfastPrice)}
                                 </a>
-                                .
                             </label>
                         </div>
+                        {!singleBooking?.hasBreakfast && <div className="flex items-center justify-center mt-4">
+                            <input
+                                id="breakfast"
+                                type="checkbox"
+                                checked={addBreakfast}
+                                onChange={() => {
+                                    setAddBreakfast((breakfast) => !breakfast)
+                                    setConfirmPaid(false)
+                                }
+                                }
+                                className="w-4 h-4 disabled:cursor-not-allowed disabled:text-gray-300 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            />
+                            <label
+                                htmlFor="breakfast"
+                                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            >
+                                Want to add {" "}
+                                <a className="text-blue-600 dark:text-blue-500">
+                                    breakfast for <span className="font-Inter text-gray-400">{formatCurrency(optionalBreakfastPrice)}</span>
+                                </a>
+
+                            </label>
+                        </div>}
                     </p>
                     <div className="mt-6">
                         <div className="rounded-md flex flex-col gap-y-2 lg:flex-row lg:gap-x-2">
