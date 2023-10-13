@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {
@@ -5,6 +6,7 @@ export async function getCabins() {
 
     if (error) {
         console.error(error);
+        toast.error("Cabins could not be loaded")
         throw new Error("Cabins could not be loaded");
     }
 
@@ -39,6 +41,7 @@ export async function createEditCabin(newCabin, id) {
 
     if (error) {
         console.error(error);
+        toast.error("Cabins could not be created")
         throw new Error("Cabins could not be created" + error);
     }
 
@@ -56,6 +59,7 @@ export async function createEditCabin(newCabin, id) {
             .delete()
             .eq('id', data.id)
         console.error(storageError);
+        toast.error("Cabins image could not be uploaded & cabin was not created")
         throw new Error("Cabins image could not be uploaded & cabin was not created");
     }
 
@@ -70,6 +74,7 @@ export async function deleteCabin(id) {
 
     if (error) {
         console.error(error);
+        toast.error("Cabins could not be deleted")
         throw new Error("Cabins could not be deleted" + error);
     }
 

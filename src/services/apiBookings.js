@@ -1,6 +1,7 @@
 import { getToday } from "../utils/helpers";
 import { PAGE_SIZE } from "../utils/constants";
 import supabase from "./supabase";
+import toast from "react-hot-toast";
 
 export async function getBookings({ filter, sortBy, page }) {
     let query = supabase.from("bookings").select("*, cabins(*), guests(*)", { count: "exact" });
@@ -28,6 +29,7 @@ export async function getBookings({ filter, sortBy, page }) {
 
     if (error) {
         console.error(error);
+        toast.error("Bookings could not be loaded")
         throw new Error("Bookings could not be loaded");
     }
 
@@ -43,6 +45,7 @@ export async function getBooking(id) {
 
     if (error) {
         console.error(error);
+        toast.error("Booking not found")
         throw new Error("Booking not found");
     }
 
@@ -59,6 +62,7 @@ export async function getBookingsAfterDate(date) {
 
     if (error) {
         console.error(error);
+        toast.error("Bookings could not get loaded")
         throw new Error("Bookings could not get loaded");
     }
 
@@ -76,6 +80,7 @@ export async function getStaysAfterDate(date) {
 
     if (error) {
         console.error(error);
+        toast.error("Bookings could not get loaded")
         throw new Error("Bookings could not get loaded");
     }
 
@@ -98,6 +103,7 @@ export async function getStaysTodayActivity() {
 
     if (error) {
         console.error(error);
+        toast.error("Bookings could not get loaded")
         throw new Error("Bookings could not get loaded");
     }
     return data;
@@ -113,6 +119,7 @@ export async function updateBooking(id, obj) {
 
     if (error) {
         console.error(error);
+        toast.error("Bookings could not be updated")
         throw new Error("Booking could not be updated");
     }
     return data;
@@ -124,6 +131,7 @@ export async function deleteBooking(id) {
 
     if (error) {
         console.error(error);
+        toast.error("Bookings could not be deleted")
         throw new Error("Booking could not be deleted");
     }
     return data;
