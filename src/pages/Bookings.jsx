@@ -9,9 +9,11 @@ import BookingsSortBy from "../ui/BookingsSortBy";
 import BookingStatusFilter from "../ui/BookingStatusFilter"
 import BookingsPagination from "../ui/BookingsPagination";
 import { useNavigate } from "react-router-dom";
+import { useCheckOut } from "../hooks/useCheckOut";
 
 function Bookings() {
   const { bookings, isLoading } = useBookings();
+  const { checkOut, isCheckingOut } = useCheckOut();
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -124,16 +126,19 @@ function Bookings() {
                             Check in
                           </button>
                           }
+                          {booking.status === "checked-in" && <button
+                            onClick={() => checkOut(booking.id)}
+                            disabled={isCheckingOut}
+                            type="button"
+                            data-hs-overlay="#hs-modal-signup"
+                            className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                          >
+                            Check out
+                          </button>
+                          }
                           <button
                             type="button"
-                            // disabled={isDeleting}
                             data-hs-overlay="#hs-danger-alert"
-                            // onClick={() => {
-                            //   deleteCabin(cabin.id)
-                            //   console.log("Delete button clicked with cabinId:", cabin.id);
-                            //   setCabinId(cabin.id);
-                            //   setShowDeleteForm(true);
-                            // }}
                             className="disabled:cursor-not-allowed flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                           >
                             Delete booking

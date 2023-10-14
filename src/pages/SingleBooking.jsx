@@ -8,13 +8,13 @@ import { HiOutlineMail } from "react-icons/hi"
 import { useMoveBack } from "../hooks/useMoveBack"
 import StatusBadge from "../ui/StatusBadge";
 import { useNavigate } from "react-router-dom";
+import { useCheckOut } from "../hooks/useCheckOut";
 
 function Booking() {
     const { isLoading, singleBooking } = useSingleBooking();
+    const { checkOut, isCheckingOut } = useCheckOut();
     const navigate = useNavigate();
     const moveBack = useMoveBack();
-
-    console.log(singleBooking);
 
     if (isLoading) {
         return <Spinner />;
@@ -93,50 +93,6 @@ function Booking() {
                             </li>
                         </ul>
                     </div>
-                    {/* <div className="mt-8">
-                        <div className="flex items-center">
-                            <h4 className="flex-shrink-0 pr-4 text-sm font-semibold leading-5 tracking-wider text-indigo-600 uppercase bg-white dark:bg-gray-800">
-                                &amp; What's not
-                            </h4>
-                        </div>
-                        <ul className="mt-8 lg:grid lg:grid-cols-2 lg:col-gap-8 lg:row-gap-5">
-                            <li className="flex items-start lg:col-span-1">
-                                <div className="flex-shrink-0">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={6}
-                                        height={6}
-                                        className="w-6 h-6 mr-2"
-                                        fill="red"
-                                        viewBox="0 0 1792 1792"
-                                    >
-                                        <path d="M1277 1122q0-26-19-45l-181-181 181-181q19-19 19-45 0-27-19-46l-90-90q-19-19-46-19-26 0-45 19l-181 181-181-181q-19-19-45-19-27 0-46 19l-90 90q-19 19-19 46 0 26 19 45l181 181-181 181q-19 19-19 45 0 27 19 46l90 90q19 19 46 19 26 0 45-19l181-181 181 181q19 19 45 19 27 0 46-19l90-90q19-19 19-46zm387-226q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
-                                    </svg>
-                                </div>
-                                <p className="ml-3 text-sm leading-5 text-gray-700 dark:text-gray-200">
-                                    No Contracts. No monthly, setup, or additional payment processor
-                                    fees
-                                </p>
-                            </li>
-                            <li className="flex items-start lg:col-span-1">
-                                <div className="flex-shrink-0">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={6}
-                                        height={6}
-                                        className="w-6 h-6 mr-2"
-                                        fill="red"
-                                        viewBox="0 0 1792 1792"
-                                    >
-                                        <path d="M1277 1122q0-26-19-45l-181-181 181-181q19-19 19-45 0-27-19-46l-90-90q-19-19-46-19-26 0-45 19l-181 181-181-181q-19-19-45-19-27 0-46 19l-90 90q-19 19-19 46 0 26 19 45l181 181-181 181q-19 19-19 45 0 27 19 46l90 90q19 19 46 19 26 0 45-19l181-181 181 181q19 19 45 19 27 0 46-19l90-90q19-19 19-46zm387-226q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
-                                    </svg>
-                                </div>
-                                <p className="ml-3 text-sm leading-5 text-gray-700 dark:text-gray-200">
-                                    No 2-week on-boarding, it takes 20 minutes!
-                                </p>
-                            </li>
-                        </ul>
-                    </div> */}
                 </div>
                 <div className="px-6 py-8 mb-3 rounded-md text-center bg-gray-50 dark:bg-gray-700 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
                     <p className="text-lg font-bold leading-6 text-gray-900 dark:text-white">
@@ -170,6 +126,14 @@ function Booking() {
                                 className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
                             >
                                 Check in
+                            </button>}
+                            {singleBooking.status === "checked-in" && <button
+                                onClick={() => checkOut(singleBooking?.id)}
+                                disabled={isCheckingOut}
+                                type="button"
+                                className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
+                            >
+                                Check out
                             </button>}
                             <button
                                 type="button"
