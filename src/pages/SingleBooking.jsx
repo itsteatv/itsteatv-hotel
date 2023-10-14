@@ -36,7 +36,7 @@ function SingleBooking() {
     return (
         <>
             <div className="flex items-center justify-center mt-8 px-4 mx-auto sm:px-6 lg:px-8">
-                <div className="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg pricing-box lg:max-w-none lg:flex">
+                <div className="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg pricing-box mb-4 lg:max-w-none lg:flex">
                     <div className="px-6 py-8 bg-white dark:bg-gray-800 lg:flex-shrink-1 lg:p-12">
                         <h3 className="flex items-center gap-x-2 text-2xl font-extrabold leading-8 text-gray-900 sm:text-3xl sm:leading-9 dark:text-white">
                             Booking #{singleBooking?.id} <StatusBadge status={singleBooking.status} />
@@ -108,7 +108,7 @@ function SingleBooking() {
                             </ul>
                         </div>
                     </div>
-                    <div className="px-6 py-8 mb-3 rounded-md text-center bg-gray-50 dark:bg-gray-700 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
+                    <div className="px-6 py-8 rounded-md text-center bg-gray-50 dark:bg-gray-700 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
                         <p className="text-lg font-bold leading-6 text-gray-900 dark:text-white">
                             {singleBooking?.isPaid === true ? <span className="text-green-400">Paid</span> : <span className="text-red-600">Not Paid</span>}
                         </p>
