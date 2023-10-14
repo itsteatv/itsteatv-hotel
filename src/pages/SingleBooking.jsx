@@ -38,10 +38,10 @@ function SingleBooking() {
             <div className="flex items-center justify-center mt-8 px-4 mx-auto sm:px-6 lg:px-8">
                 <div className="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg pricing-box mb-4 lg:max-w-none lg:flex">
                     <div className="px-6 py-8 bg-white dark:bg-gray-800 lg:flex-shrink-1 lg:p-12">
-                        <h3 className="flex items-center gap-x-2 text-2xl font-extrabold leading-8 text-gray-900 sm:text-3xl sm:leading-9 dark:text-white">
+                        <h3 className="flex items-center gap-x-2 text-2xl font-extrabold leading-8 text-gray-900 sm:text-3xl sm:leading-9 dark:text-white singleBookingMQ:flex-col singleBookingMQ:gap-y-2">
                             Booking #{singleBooking?.id} <StatusBadge status={singleBooking.status} />
                         </h3>
-                        <p className="mt-6 text-base leading-6 font-Inter text-gray-500 dark:text-gray-200">
+                        <p className="mt-6 text-base leading-6 font-Inter text-gray-500 dark:text-gray-200 text-singleBookingMQFont singleBookingMQ:text-center">
                             {format(new Date(singleBooking?.startDate), 'EEE, MMM dd yyyy')} (
                             {isToday(new Date(singleBooking?.startDate))
                                 ? 'Today'
@@ -115,7 +115,9 @@ function SingleBooking() {
                         <div className="flex items-center justify-center mt-4 text-5xl font-extrabold leading-none text-gray-900 dark:text-white">
                             <span className="flex flex-col">
                                 <span className="font-Inter text-sm">Total price :</span>
-                                {formatCurrency(singleBooking?.totalPrice)}
+                                <span className="singleBookingMQ:text-singleBookingMQBig">
+                                    {formatCurrency(singleBooking?.totalPrice)}
+                                </span>
                             </span>
                         </div>
                         <p className="mt-4 text-sm leading-5">

@@ -18,10 +18,13 @@ export default {
         "filteringDiscount": { "min": "9.375em", "max": "40em" },
         "settingForm": { "min": "9.375em", "max": "37.5em" },
         "extraSmall": { "min": "9.375em", "max": "28.125em" },
+        "singleBookingMQ": { "min": "9.375em", "max": "21.25em" },
       },
       fontSize: {
         clamp: "clamp(0.75rem, 2.3vw + 0.5rem, 1.875rem)",
-        dateFont: "clamp(0.5rem, 1.6vw + 0.3rem, 1rem)"
+        dateFont: "clamp(0.5rem, 1.6vw + 0.3rem, 1rem)",
+        singleBookingMQFont: "clamp(0.5rem, 4.2vw + 0.1rem, 1rem)",
+        singleBookingMQBig: "clamp(0.5rem, 21.1vw - 1.5rem, 3rem)",
       }
     },
   },
