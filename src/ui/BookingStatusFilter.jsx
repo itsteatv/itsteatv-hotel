@@ -11,9 +11,14 @@ function FilterCabinDiscount() {
     };
 
     const handleDiscountFilter = function (value) {
+        if (searchParams.get("page")) {
+            searchParams.set("page", 1)
+        }
+
         searchParams.set("status", value);
         setSearchParams(searchParams);
         setActiveTab(value);
+
     }
 
     return (
