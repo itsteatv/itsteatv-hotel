@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import supabase from "./supabase";
 
 export async function getSettings() {
@@ -6,7 +5,6 @@ export async function getSettings() {
 
     if (error) {
         console.error(error);
-        toast.error("Settings could not be loaded")
         throw new Error("Settings could not be loaded");
     }
     return data;
@@ -23,7 +21,6 @@ export async function updateSetting(newSetting) {
 
     if (error) {
         console.error(error);
-        toast.error("Settings could not be updated")
         throw new Error("Settings could not be updated");
     }
     return data;
