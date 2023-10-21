@@ -1,14 +1,32 @@
+import { useState } from "react"
+import { useLogin } from "../hooks/useLogin";
+import { AiOutlineLogin } from "react-icons/ai"
+import Spinner from "../ui/Spinner"
 
 function Login() {
+  const [email, setEmail] = useState("itsteatv@gmail.com");
+  const [password, setPassword] = useState("12345");
+  const { isLoading, login } = useLogin();
+
+  const onSubmitHandler = function (event) {
+    event.preventDefault();
+
+    if (!email || !password) return;
+
+    login({ email, password })
+  }
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
   return (
     <>
-      <div className=" bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white flex justify-center">
+      <form onSubmit={onSubmitHandler} className="bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white flex justify-center">
         <div className="max-w-screen-xl m-0 sm:m-10 bg-white dark:bg-gray-800 shadow sm:rounded-lg flex justify-center flex-1">
           <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-            <div>
-            </div>
             <div className="mt-12 flex flex-col items-center">
-              <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
+              <h1 className="text-2xl xl:text-3xl font-extrabold">Log in</h1>
               <div className="w-full flex-1 mt-8">
                 <div className="flex flex-col items-center">
                   <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
@@ -53,38 +71,35 @@ function Login() {
                   </button>
                 </div>
                 <div className="my-12 border-b text-center">
-                  <div className="leading-none px-2 inline-block text-sm text-gray-600 dark:text-white dark:bg-gray-800 tracking-wide font-medium transform translate-y-1/2">
-                    Or sign up with e-mail
+                  <div className="leading-none px-2 py-2 inline-block text-sm text-white bg-gray-800 dark:text-white dark:bg-gray-800 tracking-wide font-medium transform translate-y-1/2">
+                    Or log in with e-mail
                   </div>
                 </div>
                 <div className="mx-auto max-w-xs">
                   <input
-                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 dark:text-black text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    className="w-full px-8 py-4 rounded-lg font-medium disabled:cursor-not-allowed disabled:bg-gray-300 bg-gray-100 border border-gray-200 placeholder-gray-500 dark:text-black text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={isLoading}
                     type="email"
                     placeholder="Email"
+                    autoComplete="username"
                   />
                   <input
-                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 dark:text-black text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    className="w-full px-8 py-4 rounded-lg font-medium disabled:cursor-not-allowed disabled:bg-gray-300 bg-gray-100 border border-gray-200 placeholder-gray-500 dark:text-black text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={isLoading}
                     type="password"
                     placeholder="Password"
+                    autoComplete="current-password"
                   />
                   <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                    <svg
-                      className="w-6 h-6 -ml-2"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                      <circle cx="8.5" cy={7} r={4} />
-                      <path d="M20 8v6M23 11h-6" />
-                    </svg>
-                    <span className="ml-3">Sign Up</span>
+                    <AiOutlineLogin size={20} />
+                    <span className="ml-3 disabled:cursor-not-allowed disabled:bg-gray-300">{!isLoading ? "Log in" : <Spinner />}</span>
                   </button>
                   <p className="mt-6 text-xs text-gray-600 dark:text-white text-center">
-                    I agree to abide by templatana's
+                    I agree to abide by itsteatv's hotel
                     <a href="#" className="border-b border-gray-500 border-dotted">
                       Terms of Service
                     </a>
@@ -107,7 +122,7 @@ function Login() {
             ></div>
           </div>
         </div>
-      </div>
+      </form>
     </>
   )
 }
