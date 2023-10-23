@@ -21,10 +21,6 @@ export async function signInWithDiscord() {
     if (error) {
         throw new Error(error.message)
     }
-
-    console.log(data);
-
-    return data
 }
 
 export async function signOut() {
