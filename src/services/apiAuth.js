@@ -16,9 +16,6 @@ export async function login({ email, password }) {
 export async function signInWithDiscord() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'discord',
-        options: {
-            redirectTo: "https://master--enchanting-cannoli-80698f.netlify.app/dashboard"
-        }
     })
 
     if (error) {
@@ -34,4 +31,20 @@ export async function signOut() {
     if (error) {
         throw new Error(error.message)
     }
+}
+
+export async function getCurrentUser() {
+    const { data: session } = await supabase.auth.getSession()
+
+    if (!session.session) return null;
+
+    const { data, error } = await supabase.auth.getUser();
+
+    console.log(data);
+
+    if (error) {
+        throw new Error(error.message)
+    }
+
+    return data?.user
 }

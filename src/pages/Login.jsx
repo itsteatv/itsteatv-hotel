@@ -14,7 +14,12 @@ function Login() {
 
     if (!email || !password) return;
 
-    login({ email, password })
+    login({ email, password }, {
+      onSettled: () => {
+        setEmail("");
+        setPassword("");
+      }
+    })
   }
 
   const onDiscordSubmitHandler = function (event) {
