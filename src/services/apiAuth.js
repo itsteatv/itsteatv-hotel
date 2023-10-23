@@ -16,6 +16,9 @@ export async function login({ email, password }) {
 export async function signInWithDiscord() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'discord',
+        options: {
+            redirectTo: "https://wbwcdwquffnvigyndarr.supabase.co/auth/v1/callback"
+        }
     })
 
     if (error) {
