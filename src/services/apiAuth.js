@@ -17,13 +17,15 @@ export async function signInWithDiscord() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'discord',
         options: {
-            redirectTo: "https://wbwcdwquffnvigyndarr.supabase.co/auth/v1/callback"
+            redirectTo: "https://master--enchanting-cannoli-80698f.netlify.app/dashboard"
         }
     })
 
     if (error) {
         throw new Error(error.message)
     }
+
+    return data
 }
 
 export async function signOut() {
