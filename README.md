@@ -25,3 +25,4 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [ ] Authentication (Login)
 
 # still working on the project
+# If you login with discord and after you are authenticated you get a page unavailable error, don't worry, you're discord profile is authorized
