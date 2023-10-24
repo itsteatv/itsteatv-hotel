@@ -32,7 +32,7 @@ function ThemeSwitcher() {
     };
 
     return (
-        <div className="ml-2">
+        <div className="flex items-center flex-col cursor-pointer">
             {theme === 'dark' ? (
                 <BsSun className="text-white" onClick={handleChangeTheme} />
             ) : (
