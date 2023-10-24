@@ -11,7 +11,7 @@ export function useLogin() {
 
         onSuccess: () => {
             toast.success("You've been successfully logged in"),
-                navigate("/dashboard")
+                navigate("/dashboard", { replace: true })
         },
 
         onError: (error) => {

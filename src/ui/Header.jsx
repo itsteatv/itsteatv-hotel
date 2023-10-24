@@ -1,6 +1,7 @@
 import('preline')
 import { Link } from 'react-router-dom';
 import ThemeSwitcher from './ThemeSwitcher';
+import Logout from '../ui/Logout';
 
 function Header() {
 
@@ -106,6 +107,7 @@ function Header() {
               >
                 Settings
               </Link>
+              <Logout />
               {/* <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
                 <button
                   type="button"
