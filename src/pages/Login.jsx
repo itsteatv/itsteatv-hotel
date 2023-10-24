@@ -22,12 +22,6 @@ function Login() {
     })
   }
 
-  const onDiscordSubmitHandler = function (event) {
-    event.preventDefault();
-
-    signInWithDiscord()
-  }
-
   if (isLoading) {
     return <Spinner />
   }
@@ -75,7 +69,7 @@ function Login() {
                     </div>
                     <span className="ml-4">Sign Up with GitHub</span>
                   </button>
-                  <button onClick={onDiscordSubmitHandler} className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
+                  <button onClick={signInWithDiscord} className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
                     <div className="bg-white p-1 rounded-full">
                       <svg width="24" height="24" viewBox="0 -2.672 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M20.33 1.556A19.547 19.547 0 0 0 15.379 0c-.213.386-.462.904-.634 1.317a18.154 18.154 0 0 0-5.487 0A14.183 14.183 0 0 0 8.616 0a19.482 19.482 0 0 0-4.955 1.56C.527 6.295-.323 10.913.102 15.465a19.787 19.787 0 0 0 6.073 3.112 15.103 15.103 0 0 0 1.3-2.143 12.789 12.789 0 0 1-2.048-.997 10.185 10.185 0 0 0 .502-.397c3.949 1.847 8.24 1.847 12.142 0a12.343 12.343 0 0 0 .502.397 12.757 12.757 0 0 1-2.052.999c.376.752.81 1.469 1.301 2.142a19.753 19.753 0 0 0 6.076-3.114c.498-5.277-.851-9.852-3.568-13.909ZM8.013 12.665c-1.185 0-2.158-1.107-2.158-2.454s.951-2.456 2.158-2.456c1.206 0 2.178 1.107 2.158 2.456.002 1.348-.951 2.454-2.158 2.454Zm7.974 0c-1.185 0-2.158-1.107-2.158-2.454s.951-2.456 2.158-2.456c1.206 0 2.178 1.107 2.158 2.456 0 1.348-.951 2.454-2.158 2.454Z" fill="#5865F2" /></svg>
                     </div>
