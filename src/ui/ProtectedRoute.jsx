@@ -14,12 +14,6 @@ function ProtectedRoute({ children }) {
         if (!isAuthenticated && !isLoading) navigate("/login")
     }, [isAuthenticated, isLoading, navigate])
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            navigate("/dashboard");
-        }
-    }, [isAuthenticated, navigate]);
-
     if (isLoading) {
         return <Spinner />
     }
