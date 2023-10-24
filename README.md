@@ -22,7 +22,7 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Searching Cabins
 - [x] Pagination for bookings
 - [x] Booking detail page
-- [ ] Authentication (Login)
+- [x] Authentication (Login)
 
 # still working on the project
 # If you login with discord and after you are authenticated you get a page unavailable error, don't worry, you're discord profile is authorized
