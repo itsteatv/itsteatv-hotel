@@ -12,13 +12,13 @@ function Header() {
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
-            <a
+            <Link
               className="flex-none text-xl font-semibold dark:text-white"
-              href="#"
+              to="/"
               aria-label="Brand"
             >
               itsteatv hotel
-            </a>
+            </Link>
           </div>
           <div className="flex items-center ml-auto sm:ml-0 sm:order-3">
             <div className="sm:hidden">
