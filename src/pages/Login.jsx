@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin";
 import { AiOutlineLogin } from "react-icons/ai"
-import { signInWithDiscord, signOut } from "../services/apiAuth"
+import { signInWithDiscord } from "../services/apiAuth"
 import Spinner from "../ui/Spinner"
 
 function Login() {
