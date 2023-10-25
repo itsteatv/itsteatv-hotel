@@ -1,13 +1,20 @@
 import { useForm } from "react-hook-form"
+import { useSignUp } from "../hooks/useSignUp";
+import Spinner from "../ui/Spinner"
 
 function Users() {
-  const { register, handleSubmit, formState, getValues } = useForm();
+  const { signUp, isLoading } = useSignUp();
+  const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
 
-  console.log(errors);
+  if (isLoading) {
+    return <Spinner />;
+  }
 
-  const onHandleSubmit = function (data) {
-    console.log(data);
+  const onHandleSubmit = function ({ fullName, email, password }) {
+    signUp({ fullName, email, password }, {
+      onSettled: () => reset
+    });
   }
 
   return (
@@ -26,6 +33,7 @@ function Users() {
             type="text"
             id="full-name"
             {...register("fullName", { required: "This field is required" })}
+            disabled={isLoading}
             className="disabled:cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
           {errors.fullName && (
@@ -49,6 +57,7 @@ function Users() {
                 message: "Please enter a valid email address",
               }
             })}
+            disabled={isLoading}
             className="disabled:cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
           {errors.email && (
@@ -72,6 +81,7 @@ function Users() {
                 message: "Password must be at least 8 characters"
               }
             })}
+            disabled={isLoading}
             className="disabled:cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
           {errors.password && (
@@ -92,6 +102,7 @@ function Users() {
             {...register("passwordConfirm", {
               required: "This field is required", validate: (value) => value === getValues().password || "Password needs to match"
             })}
+            disabled={isLoading}
             className="disabled:cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
           {errors.passwordConfirm && (
@@ -103,13 +114,15 @@ function Users() {
         {/* BUTTONS */}
         <button
           type="submit"
-          className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          className="disabled:cursor-not-allowed disabled:bg-gray-200 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          disabled={isLoading}
         >
           Create a new user
         </button>
         <button
           type="reset"
-          className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          className="disabled:cursor-not-allowed disabled:bg-gray-200 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          disabled={isLoading}
         >
           Cancel
         </button>
