@@ -1,5 +1,5 @@
 import('preline')
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import ThemeSwitcher from './ThemeSwitcher';
 import Logout from '../ui/Logout';
 
@@ -82,31 +82,39 @@ function Header() {
             data-hs-overlay-close-on-resize=""
           >
             <div className="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:pl-7">
-              <Link
-                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "font-medium px-6 sm:py-6 sm:px-0 text-blue-600 hover:text-blue-700" : "font-medium text-gray-500 hover:text-gray-400 px-6 sm:py-6 sm:px-0 dark:text-gray-400 dark:hover:text-gray-500"
+                }
                 to="/cabins"
                 aria-current="page"
               >
                 Cabins
-              </Link>
-              <Link
-                className="font-medium text-gray-500 hover:text-gray-400 px-6 sm:py-6 sm:px-0 dark:text-gray-400 dark:hover:text-gray-500"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "font-medium px-6 sm:py-6 sm:px-0 text-blue-600 hover:text-blue-700" : "font-medium text-gray-500 hover:text-gray-400 px-6 sm:py-6 sm:px-0 dark:text-gray-400 dark:hover:text-gray-500"
+                }
                 to="/users"
               >
                 Users
-              </Link>
-              <Link
-                className="font-medium text-gray-500 hover:text-gray-400 px-6 sm:py-6 sm:px-0 dark:text-gray-400 dark:hover:text-gray-500"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "font-medium px-6 sm:py-6 sm:px-0 text-blue-600 hover:text-blue-700" : "font-medium text-gray-500 hover:text-gray-400 px-6 sm:py-6 sm:px-0 dark:text-gray-400 dark:hover:text-gray-500"
+                }
                 to="/bookings"
               >
                 Bookings
-              </Link>
-              <Link
-                className="font-medium text-gray-500 hover:text-gray-400 px-6 sm:py-6 sm:px-0 dark:text-gray-400 dark:hover:text-gray-500"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "font-medium px-6 sm:py-6 sm:px-0 text-blue-600 hover:text-blue-700" : "font-medium text-gray-500 hover:text-gray-400 px-6 sm:py-6 sm:px-0 dark:text-gray-400 dark:hover:text-gray-500"
+                }
                 to="/settings"
               >
                 Settings
-              </Link>
+              </NavLink>
               <Logout />
               {/* <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
                 <button
@@ -196,14 +204,15 @@ function Header() {
               </div> */}
               <ThemeSwitcher />
             </div>
-          </div>
-        </nav>
-      </header>
+          </div >
+        </nav >
+      </header >
       {/* Offcanvas */}
-      <div
+      <div div div
         id="navbar-secondary-content"
         className="hs-overlay hs-overlay-open:translate-x-0 hidden -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full max-w-xs w-full z-[60] bg-white border-r dark:bg-gray-800 dark:border-gray-700"
-        tabIndex={-1}
+        tabIndex={- 1
+        }
       >
         <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
           <h3 className="font-bold text-gray-800 dark:text-white">
@@ -236,7 +245,7 @@ function Header() {
             ReactJs, Supabase, tailwindCSS and other libraries.
           </p>
         </div>
-      </div>
+      </div >
       {/* End Offcanvas */}
     </>
   )
