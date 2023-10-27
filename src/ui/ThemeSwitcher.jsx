@@ -32,11 +32,11 @@ function ThemeSwitcher() {
     };
 
     return (
-        <div className="flex items-center flex-col cursor-pointer">
+        <div className="flex px-[0.75rem] py-2 flex-col cursor-pointer">
             {theme === 'dark' ? (
-                <BsSun className="text-white" onClick={handleChangeTheme} />
+                <p className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" onClick={handleChangeTheme}>Going Light</p>
             ) : (
-                <BsMoon onClick={handleChangeTheme} />
+                <p className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" onClick={handleChangeTheme}>Going Dark</p>
             )}
         </div>
     );
