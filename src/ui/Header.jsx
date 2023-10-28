@@ -2,6 +2,7 @@ import('preline')
 import { Link, NavLink } from 'react-router-dom';
 import ThemeSwitcher from './ThemeSwitcher';
 import Logout from '../ui/Logout';
+import UserAvatar from './UserAvatar';
 
 function Header() {
 
@@ -14,7 +15,7 @@ function Header() {
         >
           <div className="flex items-center justify-between">
             <Link
-              className="flex-none text-xl font-semibold dark:text-white"
+              className="flex-none text-xl font-semibold dark:text-white font-Inter"
               to="/"
               aria-label="Brand"
             >
@@ -109,6 +110,7 @@ function Header() {
                   <div
                     className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                   >
+                    <UserAvatar />
                     <Logout />
                   </div>
                   <div className="hs-dropdown relative [--strategy:static] sm:[--strategy:absolute] [--adaptive:none] sm:[--trigger:hover]">
@@ -149,6 +151,14 @@ function Header() {
                         to="/settings"
                       >
                         Settings
+                      </NavLink>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? "flex px-[0.75rem] font-medium py-2 text-blue-600 hover:text-blue-700" : "flex px-[0.75rem] py-2 font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
+                        }
+                        to="/account"
+                      >
+                        Account
                       </NavLink>
                       <ThemeSwitcher />
                     </div>

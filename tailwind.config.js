@@ -9,7 +9,8 @@ export default {
   theme: {
     fontFamily: {
       'Inter': ['Inter', 'sans-serif'],
-      'Poppins': ['"Poppins"', 'sans-serif']
+      'Poppins': ['"Poppins"', 'sans-serif'],
+      'Ubuntu': ['Ubuntu', 'sans-serif'],
     },
     extend: {
       screens: {
