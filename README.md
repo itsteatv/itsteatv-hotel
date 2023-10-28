@@ -23,6 +23,9 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Pagination for bookings
 - [x] Booking detail page
 - [x] Authentication (Login)
+- [x] Creating new user (only authenticated users allowed)
+- [ ] Update user info
 
 # still working on the project
+
 # If you login with discord and after you are authenticated you get a page unavailable error, don't worry, you're discord profile is authorized
