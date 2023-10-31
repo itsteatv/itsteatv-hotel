@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase, { supabaseUrl } from "./supabase";
 
 export async function signUp({ fullName, email, password }) {
     const { data, error } = await supabase.auth.signUp({
@@ -70,4 +70,42 @@ export async function logout() {
     if (error) {
         throw new Error(error.message)
     }
+}
+
+export async function updateCurrentUser({ password, fullName, avatar }) {
+    // 1. Update password or fullName
+
+    let updateData;
+    if (password) updateData = { password }
+    if (fullName) updateData = { data: { fullName } }
+
+    const { data, error } = await supabase.auth.updateUser(updateData)
+    console.log(data);
+
+    if (error) {
+        throw new Error(error.message)
+    }
+
+    if (!avatar) return data;
+
+    // 2. Upload the avatar image
+    const fileName = `avatar-${data.user.id}-${Math.random()}`
+    const { error: storageError } = await supabase.storage.from("avatars").upload(fileName, avatar)
+
+    if (storageError) {
+        throw new Error(storageError.message)
+    }
+
+    // 3. Update avatar in the user
+    const { data: updatedUserAvatar, error: avatarError } = supabase.auth.updateUser({
+        data: {
+            avatar: `${supabaseUrl}/storage/v1/object/public/avatars/${fileName}`
+        }
+    })
+
+    if (avatarError) {
+        throw new Error(avatarError.message)
+    }
+
+    return updatedUserAvatar;
 }
