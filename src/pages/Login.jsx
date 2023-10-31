@@ -5,8 +5,8 @@ import { signInWithDiscord } from "../services/apiAuth"
 import Spinner from "../ui/Spinner"
 
 function Login() {
-  const [email, setEmail] = useState("itsteatv@gmail.com");
-  const [password, setPassword] = useState("12345");
+  const [email, setEmail] = useState("amitaxh612@gmail.com");
+  const [password, setPassword] = useState("12345678");
   const { isLoading, login } = useLogin();
 
   const onSubmitHandler = function (event) {
