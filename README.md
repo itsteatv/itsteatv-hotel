@@ -24,7 +24,7 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Booking detail page
 - [x] Authentication (Login)
 - [x] Creating new user (only authenticated users allowed)
-- [ ] Update user info
+- [x] Update user info
 
 # still working on the project
 
