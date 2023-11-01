@@ -5,7 +5,6 @@ function UserAvatar() {
     const navigate = useNavigate();
     const { user } = useUser();
     const { fullName, avatar, email } = user.user_metadata;
-    console.log(user);
 
     return (
         <div>
@@ -21,7 +20,6 @@ function UserAvatar() {
                         <h3 className="font-semibold text-gray-800 dark:text-white">
                             {fullName}
                         </h3>
-                        <p className="text-sm font-medium text-gray-400 dark:text-white">{email}</p>
                     </div>
                 </div>
             </div>
