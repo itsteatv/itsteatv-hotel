@@ -25,6 +25,7 @@ Full stack hotel . ReactJs + Tailwind + Supabase
 - [x] Authentication (Login)
 - [x] Creating new user (only authenticated users allowed)
 - [x] Update user info
+- [ ] Dashboard layout
 
 # still working on the project
 
