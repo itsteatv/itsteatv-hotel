@@ -1,7 +1,10 @@
 
 import { formatCurrency } from "../utils/helpers";
+import { BsFillBootstrapFill, BsFillCalendarDateFill } from "react-icons/bs";
+import { SiCashapp } from "react-icons/si";
+import { IoIosStats } from "react-icons/io";
 
-function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount }) {
+function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount}) {
 
     // 1. Length of recentBookings
     const numBookings = recentBookings.length;
@@ -14,12 +17,11 @@ function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount })
 
     // 4. Occupancy rate
     const occupation = confirmedStays.reduce((occupancy, booking) => occupancy + booking.numberNights, 0) / (numDays * cabinCount);
-    console.log(numDays, cabinCount);
 
     return (
-        <div className="mx-5 my-6">
+        <div className="mx-5">
             <article
-                className="rounded-lg border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+                className="border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
             >
                 <div className="flex items-center justify-between">
                     <div>
@@ -31,49 +33,13 @@ function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount })
                     <span
                         className="rounded-full bg-blue-100 p-3 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                        </svg>
+                        <BsFillBootstrapFill className="h-8 w-8" />
                     </span>
                 </div>
-
-                {/* <div className="mt-1 flex gap-1 text-green-600">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                        />
-                    </svg>
-
-                    <p className="flex gap-2 text-xs">
-                        <span className="font-medium"> 67.81% </span>
-
-                        <span className="text-gray-500 dark:text-gray-400"> Since last week </span>
-                    </p>
-                </div> */}
             </article>
 
             <article
-                className="rounded-lg border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+                className="border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
             >
                 <div className="flex items-center justify-between">
                     <div>
@@ -85,49 +51,13 @@ function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount })
                     <span
                         className="rounded-full bg-blue-100 p-3 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                        </svg>
+                        <SiCashapp className="h-8 w-8" />
                     </span>
                 </div>
-
-                {/* <div className="mt-1 flex gap-1 text-red-600">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
-                        />
-                    </svg>
-
-                    <p className="flex gap-2 text-xs">
-                        <span className="font-medium"> 67.81% </span>
-
-                        <span className="text-gray-500 dark:text-gray-400"> Since last week </span>
-                    </p>
-                </div> */}
             </article>
 
             <article
-                className="rounded-lg border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+                className="border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
             >
                 <div className="flex items-center justify-between">
                     <div>
@@ -139,49 +69,13 @@ function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount })
                     <span
                         className="rounded-full bg-blue-100 p-3 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                        </svg>
+                        <BsFillCalendarDateFill className="h-8 w-8" />
                     </span>
                 </div>
-
-                {/* <div className="mt-1 flex gap-1 text-green-600">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                        />
-                    </svg>
-
-                    <p className="flex gap-2 text-xs">
-                        <span className="font-medium"> 67.81% </span>
-
-                        <span className="text-gray-500 dark:text-gray-400"> Since last week </span>
-                    </p>
-                </div> */}
             </article>
 
             <article
-                className="rounded-lg border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+                className="rounded-b-lg border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
             >
                 <div className="flex items-center justify-between">
                     <div>
@@ -193,45 +87,9 @@ function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount })
                     <span
                         className="rounded-full bg-blue-100 p-3 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                        </svg>
+                        <IoIosStats className="h-8 w-8" />
                     </span>
                 </div>
-
-                {/* <div className="mt-1 flex gap-1 text-red-600">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
-                        />
-                    </svg>
-
-                    <p className="flex gap-2 text-xs">
-                        <span className="font-medium"> 67.81% </span>
-
-                        <span className="text-gray-500 dark:text-gray-400"> Since last week </span>
-                    </p>
-                </div> */}
             </article>
         </div>
     )

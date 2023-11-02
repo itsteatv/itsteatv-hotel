@@ -18,7 +18,7 @@ function DashboardFilter() {
 
     return (
         <div className="relative">
-            <div className="sm:block bg-gray-50 border-gray-200 dark:border-gray-700 dark:bg-gray-800">
+            <div className="sm:block bg-gray-50 border-gray-200 dark:border-gray-700 dark:bg-gray-800 mx-5 mt-5">
                 <nav
                     className="filteringDiscount:flex-col flex flex-row items-end justify-end space-x-2 border-b dark:border-gray-700"
                     aria-label="Tabs"

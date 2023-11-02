@@ -14,9 +14,8 @@ function Dashboard() {
     return <Spinner />;
   }
 
-
   return (
-    <>
+    <div className="lg:w-full lg:max-w-[79rem] lg:mx-auto">
       <DashboardFilter />
       <DashboardStats recentBookings={recentBookings} confirmedStays={confirmedStays} numDays={numDays} cabinCount={cabins?.length} />
       <div className="dark:text-white flex flex-row items-center justify-between mt-10 ml-10 mr-10 font-Ubuntu">
@@ -25,7 +24,7 @@ function Dashboard() {
         <div>Chart  stay durations</div>
         <div>Chart sales</div>
       </div>
-    </>
+    </div>
   )
 }
 
