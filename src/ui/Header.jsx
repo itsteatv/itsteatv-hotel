@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import ThemeSwitcher from './ThemeSwitcher';
 import Logout from '../ui/Logout';
 import UserAvatar from './UserAvatar';
+import Uploader from "../data/Uploader";
 
 function Header() {
 
@@ -180,6 +181,7 @@ function Header() {
                   >
                     Bookings
                   </NavLink>
+                  <Uploader />
                 </div>
               </div>
             </div>
