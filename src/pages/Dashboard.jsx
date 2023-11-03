@@ -4,7 +4,6 @@ import DashboardFilter from "../ui/DashboardFilter"
 import Spinner from "../ui/Spinner"
 import DashboardStats from "../ui/DashboardStats";
 import { useCabin } from "../hooks/useCabin";
-import SalesChart from "../ui/SalesChart";
 
 function Dashboard() {
   const { isLoading, recentBookings } = useRecentBookings();
@@ -20,7 +19,6 @@ function Dashboard() {
       <DashboardFilter />
       <DashboardStats recentBookings={recentBookings} confirmedStays={confirmedStays} numDays={numDays} cabinCount={cabins?.length} />
       <div className="dark:text-white flex flex-row items-center justify-between mt-10 ml-10 mr-10 font-Ubuntu">
-        <SalesChart recentBookings={recentBookings} numDays={numDays} />
       </div>
     </div>
   )
