@@ -9,8 +9,8 @@ function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount}) 
     // 1. Length of recentBookings
     const numBookings = recentBookings.length;
 
-    // 2. Total sale
-    const totalSale = recentBookings.reduce((total, booking) => total + booking.totalPrice, 0);
+    // 2. Total sales
+    const totalSales = recentBookings.reduce((total, booking) => total + booking.totalPrice, 0);
 
     // 3. Total check in
     const totalCheckIn = confirmedStays.length;
@@ -45,7 +45,7 @@ function DashboardStats({ recentBookings, confirmedStays, numDays, cabinCount}) 
                     <div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">Total sales</p>
 
-                        <p className="text-2xl font-medium text-gray-900 dark:text-white">{formatCurrency(totalSale)}</p>
+                        <p className="text-2xl font-medium text-gray-900 dark:text-white">{formatCurrency(totalSales)}</p>
                     </div>
 
                     <span
