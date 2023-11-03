@@ -5,7 +5,7 @@ import { signInWithDiscord } from "../services/apiAuth"
 import Spinner from "../ui/Spinner"
 
 function Login() {
-  const [email, setEmail] = useState("amitaxh612@gmail.com");
+  const [email, setEmail] = useState("rezashow60@gmail.com");
   const [password, setPassword] = useState("12345678");
   const { isLoading, login } = useLogin();
 
