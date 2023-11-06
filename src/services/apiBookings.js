@@ -128,3 +128,37 @@ export async function deleteBooking(id) {
     }
     return data;
 }
+
+export async function getLast5Bookings() {
+    const query = supabase
+        .from("bookings")
+        .select("*, cabins(*), guests(*)")
+        .order("created_at", { ascending: false })
+        .limit(5);
+
+    const { data, error, count } = await query;
+
+    if (error) {
+        console.error(error);
+        throw new Error("Bookings could not be loaded");
+    }
+
+    return { data, count };
+}
+
+export async function getTop5ExpensiveBookings() {
+    const query = supabase
+        .from("bookings")
+        .select("*, cabins(*), guests(*)")
+        .order("totalPrice", { ascending: false })
+        .limit(5);
+
+    const { data, error, count } = await query;
+
+    if (error) {
+        console.error(error);
+        throw new Error("Bookings could not be loaded");
+    }
+
+    return { data, count };
+}

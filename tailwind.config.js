@@ -20,6 +20,7 @@ export default {
         "settingForm": { "min": "9.375em", "max": "37.5em" },
         "extraSmall": { "min": "9.375em", "max": "28.125em" },
         "singleBookingMQ": { "min": "9.375em", "max": "21.25em" },
+        "dashboardStats": { "min": "9.375em", "max": "43.75em" },
       },
       fontSize: {
         clamp: "clamp(0.75rem, 2.3vw + 0.5rem, 1.875rem)",
