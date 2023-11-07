@@ -178,4 +178,4 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 
 # project is finished but i have some plans to add some new features in near future.
 
-# If you login with discord and after you are authenticated you get a page unavailable error, don't worry, you're discord profile is authorized# itsteatv hotel.
+# If you login with discord and after you are authenticated you get a page unavailable error, don't worry, you're discord profile is authorized (i suggest login with the default account).
